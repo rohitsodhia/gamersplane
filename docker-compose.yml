@@ -1,0 +1,23 @@
+version: '3.6'
+
+volumes:
+  logs:
+    driver: local
+
+services:
+  proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    ports:
+      - 80:80
+    volumes:
+      - ${pwd}/nginx.conf:/etc/nginx/conf.d/site.conf
+      - ${pwd}/GamersPlaneNG/dist:/var/www
+      - logs:/var/logs
+
+  api:
+    build:
+      context: GamersPlane.api/.
+    volumes:
+      - ${pwd}/GamersPlane.api:/var/www/api
