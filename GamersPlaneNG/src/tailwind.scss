@@ -11,6 +11,10 @@
  */
 @tailwind preflight;
 
+html {
+	border-style: solid;
+}
+
 /**
  * This injects any component classes registered by plugins.
  *
@@ -45,6 +49,17 @@
  * @import "tailwindcss/utilities";
  */
 @tailwind utilities;
+
+.pin-tl {
+	top: 0;
+	left: 0;
+}
+
+.center-hv {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 /**
  * Here you would add any custom utilities you need that don't come out of the

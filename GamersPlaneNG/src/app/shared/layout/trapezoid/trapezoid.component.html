@@ -1,0 +1,7 @@
+<div [class.facingUp]="direction === 'up'" [class.facingDown]="direction === 'down'" [class.redTrapezoid]="red">
+	<div class="leftWing" [ngStyle]="directionBorder" [style.border-left-width]="borderWidth + 'px'"></div>
+	<div class="rightWing" [ngStyle]="directionBorder" [style.border-right-width]="borderWidth + 'px'"></div>
+	<div class="content" [style.margin-left]="borderWidth + 'px'" [style.margin-right]="borderWidth + 'px'">
+		<ng-content></ng-content>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'OpenSans_Regular';
+    src: url('assets/fonts/opensans-regular-webfont.woff2') format('woff2'),
+         url('assets/fonts/opensans-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AgencyFB';
+    src: url('assets/fonts/AgencyFB-Reg.woff2') format('woff2'),
+         url('assets/fonts/AgencyFB-Reg.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neuropol';
+    src: url('assets/fonts/Neuropol.woff2') format('woff2'),
+         url('assets/fonts/Neuropol.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

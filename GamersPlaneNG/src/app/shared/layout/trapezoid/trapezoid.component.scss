@@ -1,0 +1,35 @@
+.content {
+	background-color: #222;
+}
+
+.leftWing, .rightWing {
+	border-style: solid;
+}
+
+.leftWing {
+	float: left;
+	border-left-color: transparent;
+}
+
+.rightWing {
+	float: right;
+	border-right-color: transparent;
+}
+
+.leftWing, .rightWing {
+	border-top-color: #222;
+	border-bottom-color: #222;
+}
+
+.redTrapezoid {
+	background: none;
+
+	.content {
+		background-color: #800;
+	}
+
+	.leftWing, .rightWing {
+		border-top-color: #800;
+		border-bottom-color: #800;
+	}
+}

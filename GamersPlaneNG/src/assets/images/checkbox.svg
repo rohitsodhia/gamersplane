@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="26px" height="26px" viewBox="0 0 26 26" enable-background="new 0 0 26 26" xml:space="preserve">
+<g>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#BBB" d="M8,25c-3.86,0-7-3.141-7-7V8c0-3.86,3.14-7,7-7h10
+		c3.859,0,7,3.14,7,7v10c0,3.859-3.141,7-7,7H8z"/>
+	<path fill="#B22" d="M18,2c3.309,0,6,2.691,6,6v10c0,3.309-2.691,6-6,6H8c-3.309,0-6-2.691-6-6V8c0-3.309,2.691-6,6-6H18 M18,0
+		H8C3.581,0,0,3.582,0,8v10c0,4.418,3.581,8,8,8h10c4.418,0,8-3.582,8-8V8C26,3.582,22.418,0,18,0L18,0z"/>
+</g>
+	<g>
+		<polygon fill-rule="evenodd" clip-rule="evenodd" points="20.088,5.241 10.202,15.128 5.936,10.86 3.106,13.688 10.178,20.76 
+			22.893,8.045"/>
+	</g>
+</svg>
