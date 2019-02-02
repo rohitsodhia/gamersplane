@@ -50,6 +50,7 @@ let colors = {
 
 //   'black': '#22292f',
   'black': '#000000',
+  'transparent-black': 'rgba(0, 0, 0, .5)',
 //   'grey-darkest': '#3d4852',
 //   'grey-darker': '#606f7b',
 //   'grey-dark': '#8795a1',
@@ -804,6 +805,11 @@ module.exports = {
     '30': 30,
     '40': 40,
     '50': 50,
+    '60': 60,
+    '70': 70,
+    '80': 80,
+    '90': 90,
+    '100': 100,
   },
 
 

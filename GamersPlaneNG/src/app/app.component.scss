@@ -1,0 +1,18 @@
+#content {
+	padding-top: 70px;
+	background-color: #FFF;
+
+	.contentContainer {
+		padding: 10px 0;
+	}
+
+	&.underHeader {
+		padding-top: 0;
+	}
+}
+@media (max-width: 1200px) {
+	#content:not(.fullWidth) {
+		padding-left: 10px;
+		padding-right: 10px;
+	}	
+}

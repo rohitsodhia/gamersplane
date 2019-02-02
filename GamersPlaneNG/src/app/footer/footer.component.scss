@@ -1,0 +1,109 @@
+footer {
+	margin-bottom: 10px;
+	border-top: 5px solid #AAA;
+
+	&.withFixedMenu {
+		margin-bottom: 40px;
+	}
+}
+
+.contentContainer {
+	display: flex;
+	padding-top: 10px;
+
+	& > * {
+		display: inline-block;
+		vertical-align: top;
+	}
+}
+
+ul {
+	list-style: none;
+	margin-left: 0;
+	margin-right: 40px;
+}
+
+li {
+	padding-bottom: 10px;
+}
+
+a, a:visited, a:active {
+	font-family: OpenSans_Regular;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #FFF;
+	font-size: 16px;
+}
+
+#followLinks {
+	a {
+		display: inline-block;
+		height: 20px;
+		width: 20px;
+		margin-left: 5px;
+		background-image: url('/assets/images/socialSprites.png');
+		background-repeat: none;
+	}
+}
+
+#fl_twitter {
+	background-position: 0 0;
+}
+
+#fl_facebook {
+	background-position: -20px 0;
+}
+
+#fl_stumbleupon {
+	background-position: -40px 0;
+}
+
+#fl_twitch {
+	background-position: -60px 0;
+}
+
+.rightCol {
+	flex-grow: 2;
+	margin-right: 0;
+
+	li {
+		text-align: right;
+	}
+	
+	& > div {
+		text-align: right;
+	}
+}
+
+form {
+	input[type="image"] {
+		padding: 0;
+	}
+
+	img {
+		display: none;
+	}
+}
+
+@media (max-width: 767px) {
+	.contentContainer {
+		display: block;
+
+		& > * {
+			display: block;
+		}
+	}
+
+	ul:not(.rightCol) {
+		li {
+			display: inline-block;
+			margin-right: 15px;
+			margin-bottom: 1.5em;
+			padding-bottom: 0;
+		}
+	}
+
+	.rightCol li {
+		text-align: left;
+	}
+}

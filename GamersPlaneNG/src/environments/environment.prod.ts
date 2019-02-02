@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+	production: true,
+	apiDomain: '//api.gamersplane.com',
+	cookieDomain: '*.gamersplane.com'
 };

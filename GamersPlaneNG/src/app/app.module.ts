@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,20 +10,24 @@ import { PageLoadOverlayModule } from './shared/page-load-overlay/page-load-over
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		HeaderComponent,
-	],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
+		HttpClientModule,
 		StoreModule.forRoot({}),
+
 		AppRoutingModule,
 
 		SharedModule,
 		PageLoadOverlayModule
+	],
+	declarations: [
+		AppComponent,
+		HeaderComponent,
+		FooterComponent,
 	],
 	providers: [],
 	bootstrap: [

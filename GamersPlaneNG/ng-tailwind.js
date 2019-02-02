@@ -6,7 +6,7 @@ module.exports = {
   // Sass
   sass: true,
   // PurgeCSS Settings
-  purge: true,
+  purge: false,
   keyframes: false,
   fontFace: false,
   rejected: false,
