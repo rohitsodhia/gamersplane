@@ -1,0 +1,11 @@
+version: '3.6'
+
+services:
+  pgAdmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: rohit@rhovisions.com
+      PGADMIN_DEFAULT_PASSWORD: rohit86
