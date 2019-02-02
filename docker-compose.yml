@@ -3,6 +3,8 @@ version: '3.6'
 volumes:
   logs:
     driver: local
+  database:
+    driver: local
 
 services:
   proxy:
@@ -21,3 +23,14 @@ services:
       context: GamersPlane.api/.
     volumes:
       - ${pwd}/GamersPlane.api:/var/www/api
+
+  postgres:
+    image: postgres:11-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_DB: gamersplane
+    env_file:
+      - ./.env
+    volumes:
+      - database:/var/lib/postgresql/data
