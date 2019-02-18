@@ -15,14 +15,14 @@ services:
       - 80:80
     volumes:
       - ${pwd}/nginx.conf:/etc/nginx/conf.d/site.conf
-      - ${pwd}/GamersPlaneNG/dist:/var/www
+      - ${pwd}/frontend/dist:/var/www
       - logs:/var/logs
 
   api:
     build:
-      context: GamersPlane.api/.
+      context: api/.
     volumes:
-      - ${pwd}/GamersPlane.api:/var/www/api
+      - ${pwd}/api:/var/www/api
 
   postgres:
     image: postgres:11-alpine

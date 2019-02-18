@@ -1,0 +1,19 @@
+<div id="wrapper" class="mx-auto">
+	<form [formGroup]="login" (submit)="submitLogin()">
+		<h2 class="headerbar" hbmGroup="hbd" gp-skew>Login</h2>
+		<div gp-hbMargin="hbd">
+			<div class="row my-3">
+				<label for="login" class="inline-block">Username/Email</label> <input id="login" type="text" formControlName="login">
+			</div>
+			<div class="row my-3">
+				<label for="password" class="inline-block">Password</label> <input id="password" type="password" formControlName="password">
+			</div>
+			<div class="row my-3">
+				<button gp-skew class="fancyButton" [disabled]="login.invalid">Login</button>
+			</div>
+		</div>
+	</form>
+
+	<p><a routerLink="/register">Don't have an account? Register for free!</a></p>
+	<p><a routerLink="/recoverPassword">Trouble logging in?</a></p>
+</div>

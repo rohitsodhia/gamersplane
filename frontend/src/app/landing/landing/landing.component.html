@@ -1,0 +1,89 @@
+<div id="top" class="clearfix">
+	<div id="top_content" class="contentContainer sm:">
+		<header>
+			<h1>Scratch that RPG itch</h1>
+			<h2>Talk and play <strong>RPGs</strong> with <strong>thousands of players</strong>!</h2>
+		</header>
+		<div id="top_whiteBox" class="clearfix">
+			<div id="latestGames">
+				<h2 class="headerbar" gp-skew hbmGroup="hb">Latest Games</h2>
+				<div gp-hbMargin="hb">
+					<div id="systemSearch">
+						<div class="sprite magnifyingglass"></div>
+						<rs-combobox [data]="systems" (change)="setSystem($event)" select></rs-combobox>
+					</div>
+
+					<ul>
+						<li id="gameLoadSpinner" *ngIf="loadingGames" class="first">
+							<gp-loading-spinner></gp-loading-spinner>
+						</li>
+						<li *ngFor="let game of games; let first = first;" class="game" [class.first]="first">
+							<div class="title">
+								<a routeLink="'/games/' + game.gameID">{{game.title}}</a> ({{game.playerCount}} /
+								{{game.numPlayers}})
+							</div>
+							<div class="info">
+								<span class="system">{{game.system}}</span> run by
+								<gp-user-link [user]="game.gm"></gp-user-link>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="entry">
+				<p class="cta">Get into a game today!</p>
+				<div id="topPortalLinks">
+					<div><button (click)="openPortalModal('register')" gp-skew class="fancyButton">Register</button>
+					</div>
+					<div>- or -</div>
+					<div><button (click)="openPortalModal('login')">Login</button></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="whatIs" class="contentContainer clearfix">
+	<div id="whatIs_logos" *ngIf="(screenWidth | async) >= 425">
+		<div *ngFor="let system of whatIsLogos" [id]="'whatIs_' + system"><img
+				[src]="'/assets/images/logos/' + system + '.png'"></div>
+	</div>
+	<div id="whatIs_text">
+		<h2>What is Play-by-Post?</h2>
+		<p>While tabletop RPGs are a blast to play face to face, not everyone has the time for protracted sesions, or
+			might not live
+			near other players into the same games as them. Starting in the early days of computers, play-by-post (PbP)
+			gaming is
+			simply playing the RPGs you know and love over a forum. Rather than saying your actions aloud, you just type
+			them up!</p>
+		<p>Playing via forum means you don’t need to set side a dedicated few hours to game and can play at your
+			convience. You can
+			log in and respond to other players/the GM whenever you have a few minutes to spare, and the nature of PbP
+			makes for a
+			robust, RP friendliy environment. You can play with old friends, or make new friends around the world!</p>
+		<p>Gamers’ Plane offers you a PbP experience you won’t get anywhere else, focused around a community of gamers,
+			with tools
+			to make the experience as close to tabletop as you can get!</p>
+	</div>
+</div>
+<div id="features">
+	<div class="contentContainer">
+		<div id="features_tools">
+			<div class="icon"><span></span></div>
+			<h3>Tools</h3>
+			<p>With dice rollers and card decks built straight into the forums, the random factor is easy to include!
+			</p>
+		</div>
+		<div id="features_library">
+			<div class="icon"><span></span></div>
+			<h3>Character Library</h3>
+			<p>Need an idea for a new character? Trying to build a big baddie? See what other people share in the
+				library!</p>
+		</div>
+		<div id="features_sheets">
+			<div class="icon"><span></span></div>
+			<h3>Character Sheets</h3>
+			<p>Every character sheet is a digital replica of its real life version, so what you see online is the same
+				as off line!</p>
+		</div>
+	</div>
+</div>

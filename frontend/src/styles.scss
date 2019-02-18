@@ -1,0 +1,221 @@
+@import './variables.scss';
+// @import 'tailwind.css';
+
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* -------- */
+
+html {
+	font-size: 13px;
+	font-family: 'OpenSans_Regular', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	line-height: 1.3em;
+}
+
+body {
+	background-color: #333;
+}
+
+/* -------- */
+
+a, a:visited, a:active, .fauxLink, button.normal, button.normal:visited, button.normal:active {
+	text-decoration: none;
+	color: #B00;
+	outline: none;
+	cursor: pointer;
+}
+
+a[name] {
+	position: relative;
+	top: -70px;
+}
+
+a:hover {
+	color: #06D;
+/*	text-decoration: underline;*/
+}
+
+/* -------- */
+
+input {
+	line-height: 1.4em;
+}
+
+input, textarea {
+	padding: 4px 5px;
+
+	&:focus {
+		outline: 0;
+	}
+}
+
+input[type="text"], input[type="number"], input[type="password"], input[type="button"], input[type="file"], select, textarea {
+	background: $input-bg;
+	border: 1px solid transparent;
+	// border: 1px solid $input-border-tl;
+	border-bottom-color: $input-border-tl;
+	// border-right-color: $input-border-br;
+	// border-radius: 6px;
+	box-sizing: border-box;
+	outline: none;
+}
+
+input[disabled='disabled'] {
+	color: #999;
+}
+
+input[type="image"] {
+	vertical-align: middle;
+}
+
+input[type="checkbox"] {
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+textarea {
+	height: 4.5em;
+	resize: none;
+}
+
+/* -------- */
+
+h1.headerbar, h2.headerbar, h3.headerbar, h4.headerbar {
+	margin: .5em 0;
+	font-family: "AgencyFB";
+	color: #FFF;
+	background: #C60;
+	text-align: left;
+}
+
+h2.hbDark, h3.hbDark, h4.hbDark {
+	background: #222;
+}
+
+div.headerbar {
+	color: #FFF;
+	background: #222;
+}
+
+h1.headerbar {
+	height: 1.3em;
+	margin-top: .2em;
+	font-size: 2.5em;
+	line-height: 1.3em;
+}
+
+.modal h1.headerbar {
+	margin-top: 0;
+}
+
+h2.headerbar {
+	height: 1.4em;
+	font-size: 2.2em;
+	line-height: 1.4em;
+}
+
+h3.headerbar {
+	font-size: 1.8em;
+	line-height: 1.3em;
+}
+
+.headerbar {
+	& > div {
+		padding: 0 8px;
+	}
+
+	a, a:visited, a:active {
+		color: #FFF;
+	}
+
+	a:hover {
+		color: #FFF;
+		font-style: italic;
+	}
+}
+
+h1, h2, h3, h4 {
+	&.hb_hasButton {
+		margin-top: 0;
+	}
+
+	&.hb_hasList {
+		margin-bottom: 0;
+	}
+}
+
+/* -------- */
+
+.fancyButton {
+	position: relative;
+/*	overflow: hidden;*/
+	display: inline-block;
+	padding: 0;
+}
+
+.fancyButton {
+	&, &:visited, &:active {
+		font-family: Neuropol;
+		font-size: 1.6em;
+		line-height: 1.2em;
+		background-color: #800;
+		color: #FFF;
+	
+		&[disabled] {
+			background-color: #A44;
+			color: #888;
+			text-shadow: none;
+			cursor: default;
+		}
+	}
+}
+
+a.fancyButton, a.fancyButton:visited, a.fancyButton:active, .redTrapezoid {
+}
+
+.fancyButton.smallButton {
+	&, &:visited, &:active {
+		font-size: 1.3em;
+		line-height: 1.2em;
+	}
+}
+
+.hbTopper .fancyButton, .hbdTopper .fancyButton {
+	display: block;
+	float: left;
+}
+
+.redWing {
+	display: block;
+}
+
+a.fancyButton > div, .redWing > div {
+	display: inline-block;
+	padding: 3px 8px;
+}
+
+a.fancyButton:hover {
+	color: #BBB;
+	text-shadow: 0 0 10px rgba(255, 0, 0, 1);
+}
+
+button.fancyButton {
+	&, &:visited, &:active {
+		padding: 3px 8px;
+	}
+}
+
+.fancyButton.disabled button, .fancyButton.disabled button:visited, .fancyButton.disabled button:active {
+	background: #844;
+	color: #BBB;
+}
+
+.fancyButton.disabled:hover button {
+	text-shadow: 0 0 10px rgba(150, 150, 150, 1);
+}
