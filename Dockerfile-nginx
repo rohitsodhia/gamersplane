@@ -2,4 +2,5 @@ FROM nginx:1.15-alpine
 
 EXPOSE 80
 
-COPY nginx.conf /etc/nginx/conf.d/site.conf
+COPY docker/nginx/nginx.conf /etc/nginx/conf.d/site.conf
+COPY frontend/dist/. /var/www/

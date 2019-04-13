@@ -1,36 +1,46 @@
 version: '3.6'
 
 volumes:
-  logs:
+  php_logs:
     driver: local
-  database:
+    name: gp_php_logs
+  postgres_db:
     driver: local
+    name: gp_postgres_db
 
 services:
   proxy:
+    container_name: gamersplane-proxy
     build:
-      context: .
+      context: ./
       dockerfile: Dockerfile-nginx
     ports:
       - 80:80
+      - 443:443
     volumes:
-      - ${pwd}/nginx.conf:/etc/nginx/conf.d/site.conf
-      - ${pwd}/frontend/dist:/var/www
-      - logs:/var/logs
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/site.conf
+      - ./frontend/dist:/var/www
+    depends_on:
+      - api
 
   api:
+    container_name: gamersplane-api
     build:
-      context: api/.
+      context: ./api
+      dockerfile: Dockerfile-php
     volumes:
-      - ${pwd}/api:/var/www/api
+      - ./:/var/www/api
+      - php_logs:/var/logs
+    depends_on:
+      - postgres
 
   postgres:
-    image: postgres:11-alpine
-    restart: always
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_DB: gamersplane
+    container_name: gamersplane-postgres
+    image: postgres:11.2-alpine
     env_file:
       - ./.env
+    ports:
+      - 5432:5432
     volumes:
-      - database:/var/lib/postgresql/data
+      - ./docker/postgres:/docker-entrypoint-initdb.d
+      - postgres_db:/var/lib/postgres

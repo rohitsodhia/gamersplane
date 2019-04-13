@@ -1,0 +1,3 @@
+CREATE USER gamersplane;
+CREATE DATABASE gamersplane;
+GRANT ALL PRIVILEGES ON DATABASE gamersplane TO gamersplane;
