@@ -1,0 +1,22 @@
+CREATE TABLE `users` (
+  `userID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `username` varchar(24) NOT NULL UNIQUE,
+  `password` varchar(64) NOT NULL,
+  `salt` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL UNIQUE,
+  `joinDate` datetime NOT NULL DEFAULT NOW(),
+  `activatedOn` datetime DEFAULT NULL,
+  `lastActivity` datetime DEFAULT NULL,
+  `reference` text,
+  `enableFilter` boolean NOT NULL DEFAULT TRUE,
+  `showAvatars` boolean NOT NULL DEFAULT TRUE,
+  `avatarExt` varchar(3),
+  `timezone` varchar(20) NOT NULL DEFAULT 'Europe/London',
+  `location` varchar(100) DEFAULT NULL,
+  `socialMedia` json,
+  `games` varchar(200) DEFAULT NULL,
+  `newGameMail` boolean NOT NULL DEFAULT '1',
+  `postSide` varchar(1) NOT NULL DEFAULT 'r',
+  `suspendedUntil` datetime DEFAULT NULL,
+  `banned` boolean NOT NULL
+) CHARSET=utf8 COLLATE=utf8_unicode_ci;

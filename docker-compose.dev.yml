@@ -2,5 +2,7 @@ version: '3.6'
 
 services:
   mysql:
+    ports:
+      - 3306:3306
     environment:
       - MYSQL_PASSWORD=test123

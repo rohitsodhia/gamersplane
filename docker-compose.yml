@@ -4,9 +4,9 @@ volumes:
   php_logs:
     driver: local
     name: gp_php_logs
-  postgres_db:
+  mysql_db:
     driver: local
-    name: gp_postgres_db
+    name: gp_mysql_db
 
 services:
   proxy:
@@ -32,15 +32,13 @@ services:
       - ./:/var/www/api
       - php_logs:/var/logs
     depends_on:
-      - postgres
+      - mysql
 
-  postgres:
-    container_name: gamersplane-postgres
-    image: postgres:11.2-alpine
+  mysql:
+    container_name: gamersplane-mysql
+    image: mysql:5.7
     env_file:
       - ./.env
-    ports:
-      - 5432:5432
     volumes:
-      - ./docker/postgres:/docker-entrypoint-initdb.d
-      - postgres_db:/var/lib/postgres
+      - ./docker/mysql:/docker-entrypoint-initdb.d
+      - mysql_db:/var/lib/mysql
