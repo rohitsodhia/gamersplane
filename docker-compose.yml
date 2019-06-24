@@ -19,7 +19,8 @@ services:
       - 443:443
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/site.conf
-      - ./frontend/dist:/var/www
+      - ./frontend/dist:/var/www/ng
+      - ./api:/var/www/api
     depends_on:
       - api
 
@@ -29,7 +30,7 @@ services:
       context: ./api
       dockerfile: Dockerfile-php
     volumes:
-      - ./:/var/www/api
+      - ./api:/var/www/api
       - php_logs:/var/logs
     depends_on:
       - mysql
