@@ -13,9 +13,12 @@ class System extends MongoModel
 		'sortName' => 'string',
 		'publisher' => 'object:\App\Models\SystemPublisher',
 		'genres' => 'array(string)',
+		'basics' => 'array(object:\App\Models\SystemBasic)',
 		'lfg' => 'integer',
 		'hasCharSheet' => 'bool',
-		'enabled' => 'bool'
+		'enabled' => 'bool',
+		'createdOn' => 'createdTimestamp',
+		'updatedOn' => 'updatedTimestamp'
 	];
 
 }

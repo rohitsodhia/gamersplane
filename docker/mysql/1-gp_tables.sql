@@ -514,12 +514,17 @@ CREATE TABLE `system_charAutocomplete_map` (
 );
 
 CREATE TABLE `systems` (
-  `systemID` int(11) NOT NULL AUTO_INCREMENT,
-  `shortName` varchar(20) NOT NULL,
-  `fullName` varchar(40) NOT NULL,
-  `enabled` tinyint(1) NOT NULL,
-  `angular` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`systemID`)
+  `id` varchar(20) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `sortName` varchar(40) NOT NULL,
+  `publisher` json NOT NULL,
+  `genres` json,
+  `basics` json,
+  `hasCharSheet` tinyint(1) NOT NULL DEFAULT 1,
+  `enabled` tinyint(1) NOT NULL DEFAULT 0,
+  `createdOn` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedOn` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `threads` (
