@@ -1,4 +1,4 @@
-FROM gp_php
+FROM gamersplane_api
 
 WORKDIR /
 
