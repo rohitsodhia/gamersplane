@@ -1,9 +1,6 @@
 version: '3.6'
 
 volumes:
-  php_logs:
-    driver: local
-    name: gp_php_logs
   mysql_db:
     driver: local
     name: gp_mysql_db
@@ -28,10 +25,17 @@ services:
     container_name: gamersplane-api
     build:
       context: ./api
-      dockerfile: Dockerfile-php
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./api:/var/www/api
-      - php_logs:/var/logs
+      - ./api:/usr/src/app
+    ports:
+      - 8000:8000
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=foo
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_HOST=${MYSQL_HOST}
     depends_on:
       - mysql
 
