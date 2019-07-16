@@ -2,8 +2,9 @@
 
 echo "Waiting for MySQL..."
 
-while ! nc -z $SQL_HOST $SQL_PORT; do
+while nc -z $MYSQL_HOST $MYSQL_PORT; do
     sleep 1
+    echo "Waiting"
 done
 
 echo "Database started"

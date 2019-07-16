@@ -36,6 +36,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_POST=3306
     depends_on:
       - mysql
 
@@ -45,5 +46,5 @@ services:
     env_file:
       - ./.env
     volumes:
-      - ./docker/mysql:/docker-entrypoint-initdb.d
+      # - ./docker/mysql:/docker-entrypoint-initdb.d
       - mysql_db:/var/lib/mysql
