@@ -21,6 +21,9 @@ class User(models.Model):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
+    class Meta:
+        db_table = 'users'
+
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
