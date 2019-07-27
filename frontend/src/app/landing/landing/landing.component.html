@@ -10,7 +10,7 @@
 				<div gp-hbMargin="hb">
 					<div id="systemSearch">
 						<div class="sprite magnifyingglass"></div>
-						<rs-combobox [data]="systems" (change)="setSystem($event)" select></rs-combobox>
+						<rs-combobox [options]="systems" (change)="setSystem($event)" select></rs-combobox>
 					</div>
 
 					<ul>
@@ -33,8 +33,7 @@
 			<div id="entry">
 				<p class="cta">Get into a game today!</p>
 				<div id="topPortalLinks">
-					<div><button (click)="openPortalModal('register')" gp-skew class="fancyButton">Register</button>
-					</div>
+					<div><button (click)="openPortalModal('register')" gp-skew class="fancyButton">Register</button></div>
 					<div>- or -</div>
 					<div><button (click)="openPortalModal('login')">Login</button></div>
 				</div>

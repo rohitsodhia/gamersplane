@@ -9,6 +9,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 
 import { HbMarginDirective } from './layout/hb-margin.directive';
 import { UserLinkComponent } from './user-link/user-link.component';
+import { ComboboxComponent } from './combobox/combobox.component';
 
 @NgModule({
 	declarations: [
@@ -20,6 +21,7 @@ import { UserLinkComponent } from './user-link/user-link.component';
 		HbMarginDirective,
 
 		UserLinkComponent,
+		ComboboxComponent,
 	],
 	imports: [
 		CommonModule,
@@ -34,6 +36,7 @@ import { UserLinkComponent } from './user-link/user-link.component';
 		HbMarginDirective,
 
 		UserLinkComponent,
+		ComboboxComponent,
 	],
 
 })
