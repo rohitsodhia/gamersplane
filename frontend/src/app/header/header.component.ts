@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { filter, map, flatMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { State } from '../shared/root-store/root-store.state'
 // import { Logout } from '../store/current-user-store/current-user/current-user.actions';
 // import { selectCurrentUser } from '../store/current-user-store/current-user/current-user.selectors';
 
@@ -92,7 +91,6 @@ export class HeaderComponent implements OnInit {
 	constructor (
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
-		private store: Store<State>,
 		private screenWidthService: ScreenWidthService,
 		// private portalModalService: PortalModalService,
 		// private pmService: PMService
