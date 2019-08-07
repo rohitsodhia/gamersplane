@@ -1,9 +1,8 @@
 from flask import Flask
-app = Flask(__name__)
+from referral_links import referral_links
 
-@app.route('/')
-def hello_world():
-  return 'Hello, World!'
+app = Flask(__name__)
+app.register_blueprint(referral_links)
 
 if __name__ == '__main__':
-  app.run()
+    app.run()
