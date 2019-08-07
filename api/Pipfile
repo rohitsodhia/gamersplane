@@ -3,30 +3,10 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
+[requires]
+python_version = "3.7"
+
 [dev-packages]
 
 [packages]
-appdirs = "==1.4.3"
-atomicwrites = "==1.3.0"
-attrs = "==19.1.0"
-black = "==19.3b0"
-click = "==7.0"
-djangorestframework = "==3.9"
-importlib-metadata = "==0.18"
-more-itertools = "==7.1.0"
-mysqlclient = "==1.4"
-pluggy = "==0.12.0"
-py = "==1.8.0"
-pyparsing = "==2.4.0"
-pytest = "==5.0"
-pytz = "==2019.1"
-six = "==1.12.0"
-sqlparse = "==0.3.0"
-toml = "==0.10.0"
-wcwidth = "==0.1.7"
-zipp = "==0.5.1"
-Django = "==2.2"
-bcrypt = "==3.1"
-
-[requires]
-python_version = "3.7"
+flask = "*"
