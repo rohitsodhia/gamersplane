@@ -10,5 +10,7 @@ python_version = "3.7"
 
 [packages]
 flask = "*"
-mysql-connector-python = "*"
 python-dotenv = "*"
+bcrypt = "*"
+pymysql = "*"
+flask-cors = "*"
