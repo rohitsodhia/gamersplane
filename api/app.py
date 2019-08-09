@@ -1,5 +1,5 @@
 from flask import Flask
-from referral_links import referral_links
+from referral_links.routes import referral_links
 
 app = Flask(__name__)
 app.register_blueprint(referral_links)
