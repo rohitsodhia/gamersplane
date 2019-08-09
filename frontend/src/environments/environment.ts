@@ -4,7 +4,7 @@
 
 export const environment = {
 	production: false,
-	apiDomain: 'https://api.gamersplane.local',
+	apiDomain: 'http://127.0.0.1:5000',
 	cookieDomain: '*.gamersplane.local'
 };
 
