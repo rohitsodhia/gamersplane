@@ -1,6 +1,9 @@
 version: '3.6'
 
 services:
+  api:
+    command: flask run
+
   mysql:
     ports:
       - 3306:3306
