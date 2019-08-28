@@ -12,5 +12,5 @@ app.register_blueprint(referral_links)
 app.register_blueprint(systems)
 app.register_blueprint(auth)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
