@@ -22,6 +22,6 @@ def login():
             password = request.json["password"]
         except KeyError:
             return jsonify({"errors": [{"id": "no_password"}]})
-        if user.validate_pass(password):
+        if user.check_pass(password):
             return jsonify({"data": {"logged_in": True, "jwt": user.generate_jwt()}})
     return jsonify({"errors": [{"id": "invalid_user"}]})

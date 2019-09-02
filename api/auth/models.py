@@ -40,7 +40,7 @@ class User(Model):
         hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
         return hashed
 
-    def validate_pass(self, password):
+    def check_pass(self, password):
         return bcrypt.checkpw(password.encode("utf-8"), self.password.encode("utf-8"))
 
     def generate_jwt(self):
