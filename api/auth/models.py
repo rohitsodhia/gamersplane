@@ -44,4 +44,6 @@ class User(Model):
         return bcrypt.checkpw(password.encode("utf-8"), self.password.encode("utf-8"))
 
     def generate_jwt(self):
-        return jwt.encode({"user_id": self.userId}, os.getenv("SECRET_KEY"), algorithm="HS256").decode("utf-8")
+        return jwt.encode(
+            {"user_id": self.userId}, os.getenv("SECRET_KEY"), algorithm="HS256"
+        ).decode("utf-8")
