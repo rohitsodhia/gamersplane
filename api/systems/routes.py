@@ -3,6 +3,8 @@ from flask import Blueprint, jsonify, request
 
 from database import db
 
+from systems.models import System
+
 systems = Blueprint("systems", __name__)
 
 
@@ -12,7 +14,7 @@ def get_systems():
     if request.values.get("basic"):
         fields = "`id`, `name`, `sortName`"
     else:
-        fields = "`id`, `name`, `sortName`, `publisher`, `genres`, `basics`, `hasCharSheet`, `enabled`, `createdOn`, `updatedOn`"
+        fields = ", ".join(f"`{}`" for field in System.get_fields())
     dbc.execute(f"SELECT {fields} FROM systems WHERE enabled = 1 ORDER BY `sortName`")
     systems = dbc.fetchall()
     for system in systems:
