@@ -1,5 +1,7 @@
 import bcrypt, jwt, os
 
+from database import db
+
 from model import Model
 
 
@@ -36,7 +38,22 @@ class User(Model):
         "username",
     ]
 
-    def hash_pass(self, password):
+    @staticmethod
+    def validate_pass(password):
+        if len(password) < 8:
+            return "too_short"
+        return True
+
+    @classmethod
+    def register(cls, email, username, password):
+        dbc = db.cursor()
+        db.execute(
+            "INSERT INTO users SET email = %(email)s, username = %(username)s, password = %(password)s",
+            {"email": email, "username": username, "password": cls.hash_pass(password)},
+        )
+
+    @staticmethod
+    def hash_pass(password):
         hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
         return hashed
 
