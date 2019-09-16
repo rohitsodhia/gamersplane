@@ -19,3 +19,6 @@ class Model:
             return self._values[name]
         except AttributeError:
             raise
+
+    def get_fields(self):
+        return self._fields
