@@ -1,4 +1,7 @@
-class System:
+from model import Model
+
+
+class System(Model):
 
     _fields = [
         "id",
