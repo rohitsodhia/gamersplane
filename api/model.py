@@ -20,5 +20,6 @@ class Model:
         except AttributeError:
             raise
 
-    def get_fields(self):
-        return self._fields
+    @classmethod
+    def get_fields(cls):
+        return cls._fields
