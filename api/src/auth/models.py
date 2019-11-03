@@ -1,42 +1,38 @@
 import bcrypt, jwt, os
 
-from database import db
-
-from model import Model
+from django.db import models
 
 
-class User(Model):
+class User(models.Model):
 
-    _fields = [
-        "activatedOn",
-        "aim",
-        "avatarExt",
-        "banned",
-        "birthday",
-        "email",
-        "enableFilter",
-        "games",
-        "gender",
-        "gmail",
-        "joinDate",
-        "lastActivity",
-        "location",
-        "newGameMail",
-        "password",
-        "postSide",
-        "realName",
-        "reference",
-        "salt",
-        "showAge",
-        "showAvatars",
-        "showTZ",
-        "stream",
-        "suspendedUntil",
-        "timezone",
-        "twitter",
-        "userId",
-        "username",
-    ]
+    userID = models.IntegerField(primary_key=True)
+    username = models.CharField(max_length=24)
+    password = models.CharField(max_length=64)
+    salt = models.CharField(max_length=20)
+    email = models.CharField(max_length=50)
+    joinDate = models.DateTimeField(auto_now=True)
+    activatedOn = models.DateTimeField(null=True)
+    lastActivity = models.DateTimeField(null=True)
+    reference = models.CharField(max_length=200, null=True)
+    enableFilter = models.BooleanField(default=True)
+    showAvatars = models.BooleanField(default=True)
+    avatarExt = models.CharField(max_length=3, null=True)
+    timezone = models.CharField(max_length=20, default="Europe/London")
+    showTZ = models.BooleanField(null=True)
+    realName = models.CharField(max_length=50, null=True)
+    gender = models.CharField(max_length=1, null=True)
+    birthday = models.DateField(null=True)
+    showAge = models.BooleanField(null=True)
+    location = models.CharField(max_length=100, null=True)
+    aim = models.CharField(max_length=50, null=True)
+    gmail = models.CharField(max_length=50, null=True)
+    twitter = models.CharField(max_length=50, null=True)
+    stream = models.CharField(max_length=50, null=True)
+    games = models.CharField(max_length=200, null=True)
+    newGameMail = models.BooleanField(default=True)
+    postSide = models.CharField(max_length=1, default="r")
+    suspendedUntil = models.DateTimeField(null=True)
+    banned = models.BooleanField()
 
     @staticmethod
     def validate_pass(password):
