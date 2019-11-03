@@ -3,7 +3,7 @@ from flask import Blueprint, jsonify, request
 
 from database import db
 
-from auth.models import User
+from auth.models.User import User
 
 auth = Blueprint("auth", __name__)
 
