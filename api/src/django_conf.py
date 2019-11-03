@@ -13,6 +13,6 @@ settings.configure(
             "PORT": "3306",
         }
     },
-    INSTALLED_APPS=["auth", "referral_links"],
+    INSTALLED_APPS=["auth", "referral_links", "systems"],
 )
 django.setup()
