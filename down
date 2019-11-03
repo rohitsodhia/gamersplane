@@ -4,10 +4,6 @@ env="dev"
 for opt in $@; do
 	parsed=0
 	case $opt in
-	"-d")
-		DETACHED="-d"
-		parsed=1
-		;;
 	"-e")
 		env=$2
 		valid=0
@@ -24,10 +20,6 @@ for opt in $@; do
 		shift
 		parsed=1
 		;;
-	"-b")
-		BUILD="--build"
-		parsed=1
-		;;
 	esac
 
 	if [[ $parsed == 1 ]]; then
@@ -40,4 +32,4 @@ if [[ $# == 1 ]]; then
 fi
 
 path="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-docker-compose -f "$path/docker-compose.yml" -f "$path/docker-compose.$env.yml" up $DETACHED $BUILD $service
+docker-compose -f "$path/docker-compose.yml" -f "$path/docker-compose.$env.yml" down $service
