@@ -18,6 +18,8 @@ RUN pipenv install --skip-lock --system --dev
 COPY . /usr/src/app/
 WORKDIR /usr/src/app/src
 
+ENV PYTHONPATH="$PYTHONPATH:/usr/src/app/src"
+
 # ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 
 CMD [ "gunicorn", "app:app", "--bind", "0.0.0.0:8000" ]
