@@ -2,7 +2,7 @@ import json
 from flask import Blueprint, jsonify, request
 from django.db import connection
 
-from auth.models.User import User
+from auth.models import User
 
 auth = Blueprint("auth", __name__)
 

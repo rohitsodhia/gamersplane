@@ -1,1 +1,1 @@
-from systems.models.System import System
+from systems.models.system import System

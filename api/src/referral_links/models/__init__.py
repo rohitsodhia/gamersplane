@@ -1,1 +1,1 @@
-from referral_links.models.ReferralLink import ReferralLink
+from referral_links.models.referral_link import ReferralLink
