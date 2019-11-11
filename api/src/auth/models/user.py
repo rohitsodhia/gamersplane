@@ -4,6 +4,8 @@ from django.db import models
 
 
 class User(models.Model):
+    class Meta:
+        db_table = "users"
 
     userID = models.IntegerField(primary_key=True)
     username = models.CharField(max_length=24)

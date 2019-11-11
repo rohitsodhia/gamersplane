@@ -3,6 +3,8 @@ from django_mysql.models import JSONField
 
 
 class System(Model):
+    class Meta:
+        db_table = "systems"
 
     id = CharField(max_length=20, primary_key=True)
     name = CharField(max_length=40)
