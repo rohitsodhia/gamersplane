@@ -7,7 +7,7 @@ class User(models.Model):
     class Meta:
         db_table = "users"
 
-    userID = models.IntegerField(primary_key=True)
+    userID = models.AutoField(primary_key=True)
     username = models.CharField(max_length=24)
     password = models.CharField(max_length=64)
     salt = models.CharField(max_length=20)
@@ -34,7 +34,7 @@ class User(models.Model):
     newGameMail = models.BooleanField(default=True)
     postSide = models.CharField(max_length=1, default="r")
     suspendedUntil = models.DateTimeField(null=True)
-    banned = models.BooleanField()
+    banned = models.BooleanField(default=False)
 
     @staticmethod
     def validate_pass(password):
