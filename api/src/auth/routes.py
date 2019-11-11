@@ -1,4 +1,5 @@
 import json
+
 from flask import Blueprint, jsonify, request
 from django.db import connection
 
@@ -30,26 +31,27 @@ def login():
 
 @auth.route("/auth/register", methods=["POST"])
 def register():
-    errors = []
-    try:
-        email = request.json["email"]
-    except KeyError:
-        errors.push({"id": "no_email"})
+    errors = {}
+    fields_missing = []
 
-    try:
-        username = request.json["username"]
-    except KeyError:
-        errors.push({"id": "no_username"})
+    email = request.json.get("email")
+    if not email:
+        fields_missing.append("email")
 
-    password = request.json["password"]
-    rep_password = request.json["rep_password"]
-    if password != rep_password:
-        errors.push({"id": "pass_mismatch"})
+    username = request.json.get("username")
+    if not username:
+        fields_missing.append("username")
 
-    pass_valid = User.validate_pass(password)
-    if pass_valid is not True:
-        errors.push({"id": f"pass_{pass_valid}"})
+    password = request.json.get("password")
+    if not password:
+        fields_missing.append("password")
+    else:
+        pass_valid = User.validate_pass(password)
+        if pass_valid is not True:
+            errors[f"pass_{pass_valid}"] = True
 
+    if len(fields_missing):
+        errors["fields_missing"] = fields_missing
     if len(errors):
         return jsonify({"errors": errors})
 
@@ -59,10 +61,11 @@ def register():
             {"email": email, "username": username},
         )
         if dbc.rowcount:
-            reg_email, reg_username = dbc.fetchone()
             errors = []
-            if reg_email == email:
-                errors.push("email_taken")
-            if reg_username == username:
-                errors.push("username_taken")
-            return jsonify({"errors": [[{"id": error}] for error in errors]})
+            for reg_email, reg_username in dbc:
+                if reg_email == email:
+                    errors["email_taken"] = True
+                if reg_username == username:
+                    errors["username_taken"] = True
+            if len(errors):
+                return jsonify({"errors": errors})
