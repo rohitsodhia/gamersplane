@@ -2,6 +2,9 @@ import os
 import django
 from django.conf import settings
 
+from django_apps import apps
+
+
 settings.configure(
     DATABASES={
         "default": {
@@ -13,6 +16,6 @@ settings.configure(
             "PORT": "3306",
         }
     },
-    INSTALLED_APPS=["auth", "referral_links", "systems"],
+    INSTALLED_APPS=apps,
 )
 django.setup()
