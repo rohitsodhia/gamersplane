@@ -2,7 +2,14 @@ version: '3.6'
 
 services:
   api:
-    command: gunicorn app:app --bind 0.0.0.0:8000 --reload
+    command: gunicorn app:app --bind 0.0.0.0:8000 --reload --timeout 600
+    ports:
+      - 4444:4444
+    environment:
+      - REMOTE_PDB_HOST=0.0.0.0
+      - REMOTE_PDB_PORT=4444
+    stdin_open: true
+    tty: true
 
   mysql:
     ports:
