@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker attach $(docker ps | awk '/gamersplane_api/{print $1}')
