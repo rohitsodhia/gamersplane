@@ -52,6 +52,9 @@ class User(models.Model):
         hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
         return hashed
 
+    def set_password(self, password):
+        self.password = self.hash_pass(password)
+
     def check_pass(self, password):
         return bcrypt.checkpw(password.encode("utf-8"), self.password.encode("utf-8"))
 
