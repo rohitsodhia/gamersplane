@@ -44,11 +44,8 @@ class User(models.Model):
 
     @classmethod
     def register(cls, email, username, password):
-        dbc = db.cursor()
-        db.execute(
-            "INSERT INTO users SET email = %(email)s, username = %(username)s, password = %(password)s",
-            {"email": email, "username": username, "password": cls.hash_pass(password)},
-        )
+        new_user = User(email=email, username=username, password=password)
+        new_user.save()
 
     @staticmethod
     def hash_pass(password):
