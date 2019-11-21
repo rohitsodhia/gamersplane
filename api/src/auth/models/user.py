@@ -1,6 +1,11 @@
-import bcrypt, jwt, os
+import os
+import hashlib
+import bcrypt
+import jwt
 
 from django.db import models
+
+from envs import DOMAIN
 
 
 class User(models.Model):
@@ -58,7 +63,11 @@ class User(models.Model):
     def check_pass(self, password):
         return bcrypt.checkpw(password.encode("utf-8"), self.password.encode("utf-8"))
 
+    def get_activation_link(self):
+        user_hash = hashlib.md5(str(self.username) + str(self.joinDate))
+        return f"{DOMAIN}/register/activate/{user_hash}"
+
     def generate_jwt(self):
         return jwt.encode(
-            {"user_id": self.userId}, os.getenv("SECRET_KEY"), algorithm="HS256"
+            {"user_id": self.userID}, os.getenv("SECRET_KEY"), algorithm="HS256"
         ).decode("utf-8")
