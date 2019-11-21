@@ -1,13 +1,11 @@
-import os, pymysql
+import pymysql
 
-host = os.getenv("MYSQL_HOST")
-user = os.getenv("MYSQL_USER")
-password = os.getenv("MYSQL_PASSWORD")
-database = os.getenv("MYSQL_DATABASE")
+from envs import MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
+
 db = pymysql.connect(
-    host=host,
-    user=user,
-    password=password,
-    db=database,
+    host=MYSQL_HOST,
+    user=MYSQL_USER,
+    password=MYSQL_PASSWORD,
+    db=MYSQL_DATABASE,
     cursorclass=pymysql.cursors.DictCursor,
 )
