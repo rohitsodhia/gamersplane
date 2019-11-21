@@ -1,0 +1,11 @@
+{% extends 'helpers/templates/base_template.html' %}
+
+{% block title %}Activate your Gamers' Plane Account{% endblock %}
+
+{% block content %}
+Thank you for registering for Gamers Plane!
+
+Please click on the following link to activate your account:
+<a href="{{ activation_link }}">Activate account</a>
+Or copy and paste this URL into your browser: {{ activation_link }}
+{% endblock %}
