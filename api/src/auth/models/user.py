@@ -50,7 +50,8 @@ class User(models.Model):
 
     @classmethod
     def register(cls, email, username, password):
-        new_user = User(email=email, username=username, password=password)
+        new_user = User(email=email, username=username)
+        new_user.set_password(password)
         new_user.save()
         new_user.send_activation_email()
 

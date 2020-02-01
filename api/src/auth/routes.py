@@ -67,8 +67,6 @@ def register():
             if len(errors):
                 return jsonify({"errors": errors})
 
-        new_user = User(email=email, username=username, password=password)
-        new_user.save()
-        new_user.send_activation_email()
+        User.register(email=email, username=username, password=password)
 
         return jsonify({"success": True})
