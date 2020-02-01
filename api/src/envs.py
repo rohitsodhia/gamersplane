@@ -1,5 +1,6 @@
 import os
 
+ENVIRONMENT = os.getenv("FLASK_ENV", "dev")
 
 DOMAIN = os.getenv("DOMAIN")
 
