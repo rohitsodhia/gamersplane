@@ -61,7 +61,7 @@ def register():
             {"email": email, "username": username},
         )
         if dbc.rowcount:
-            errors = []
+            errors = {}
             for reg_email, reg_username in dbc:
                 if reg_email == email:
                     errors["email_taken"] = True
@@ -72,4 +72,6 @@ def register():
 
         new_user = User(email=email, username=username, password=password)
         new_user.save()
-        return jsonify({"succss": True})
+        new_user.send_activation_email()
+
+        return jsonify({"success": True})

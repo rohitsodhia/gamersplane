@@ -6,6 +6,7 @@ import jwt
 from django.db import models
 
 from envs import DOMAIN
+from helpers.email import get_template, send_email
 
 
 class User(models.Model):
@@ -51,6 +52,7 @@ class User(models.Model):
     def register(cls, email, username, password):
         new_user = User(email=email, username=username, password=password)
         new_user.save()
+        new_user.send_activation_email()
 
     @staticmethod
     def hash_pass(password):
@@ -66,6 +68,12 @@ class User(models.Model):
     def get_activation_link(self):
         user_hash = hashlib.md5(str(self.username) + str(self.joinDate))
         return f"{DOMAIN}/register/activate/{user_hash}"
+
+    def send_activation_email(self):
+        email_content = get_template(
+            "auth/templates/activation.html", username=self.username
+        )
+        send_email(self.email, "Activate your Gamers' Plane account!", email_content)
 
     def generate_jwt(self):
         return jwt.encode(
