@@ -7,7 +7,7 @@ from jinja2 import FileSystemLoader, Environment
 from email.message import EmailMessage
 from email.headerregistry import Address
 
-from envs import ROOT_DIR
+from envs import ROOT_DIR, ENVIRONMENT
 
 uri = os.getenv("EMAIL_URI")
 port = os.getenv("EMAIL_PORT")
@@ -28,6 +28,9 @@ def get_template(template, **kwargs):
 
 
 def send_email(to, subject, content):
+    if ENVIRONMENT == "dev":
+        return
+
     email = EmailMessage()
     email["From"] = Address(
         display_name="No Reply (Gamers' Plane)",
