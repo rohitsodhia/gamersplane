@@ -13,4 +13,5 @@
 # !.vscode/extensions.json
 
 .env
-*/Gamers_Plane.egg-info/*
+*/Gamers_Plane.egg-info
+*/.devcontainer
