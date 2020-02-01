@@ -78,5 +78,5 @@ class User(models.Model):
 
     def generate_jwt(self):
         return jwt.encode(
-            {"user_id": self.userID}, os.getenv("SECRET_KEY"), algorithm="HS256"
+            {"user_id": self.userID}, os.getenv("JWT_SECRET_KEY"), algorithm="HS256"
         ).decode("utf-8")
