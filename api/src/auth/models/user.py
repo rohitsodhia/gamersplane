@@ -13,7 +13,6 @@ class User(models.Model):
     class Meta:
         db_table = "users"
 
-    userID = models.AutoField(primary_key=True)
     username = models.CharField(max_length=24)
     password = models.CharField(max_length=64)
     salt = models.CharField(max_length=20)
