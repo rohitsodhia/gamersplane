@@ -41,9 +41,9 @@ def register():
     if len(fields_missing):
         errors["fields_missing"] = fields_missing
 
-    email = request.json.get("email")
-    username = request.json.get("username")
-    password = request.json.get("password")
+    email = request.json["email"]
+    username = request.json["username"]
+    password = request.json["password"]
     if password:
         pass_valid = User.validate_pass(password)
         if pass_valid is not True:
