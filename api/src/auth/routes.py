@@ -5,7 +5,7 @@ from django.db import connection
 
 from helpers.endpoint import require_values
 
-from auth.models import User
+from auth.models import User, PasswordReset
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -70,3 +70,24 @@ def register():
         User.register(email=email, username=username, password=password)
 
         return jsonify({"success": True})
+
+
+@auth.route("/password_reset", methods=["POST"])
+def generate_password_reset():
+    fields_missing = require_values(request.json, ["email"])
+    if len(fields_missing):
+        return jsonify({"errors": {"fields_missing": fields_missing}})
+
+    email = request.json["email"]
+    user = User.objects.get(email=email)
+    if not user:
+        return jsonify({"errors": {"no_account": True}})
+
+    password_reset = PasswordReset.objects.get(user=user, used=False)
+    if not password_reset:
+        password_reset = PasswordReset(user=user)
+        password_reset.generate_key()
+        password_reset.save()
+    password_reset.email()
+
+    return jsonify({"success": True})
