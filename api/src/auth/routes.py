@@ -7,10 +7,10 @@ from helpers.endpoint import require_values
 
 from auth.models import User
 
-auth = Blueprint("auth", __name__)
+auth = Blueprint("auth", __name__, url_prefix="/auth")
 
 
-@auth.route("/auth/login", methods=["POST"])
+@auth.route("/login", methods=["POST"])
 def login():
     try:
         email = request.json["email"]
@@ -33,7 +33,7 @@ def login():
         return jsonify({"errors": {"invalid_user": True}})
 
 
-@auth.route("/auth/register", methods=["POST"])
+@auth.route("/register", methods=["POST"])
 def register():
     errors = {}
 
