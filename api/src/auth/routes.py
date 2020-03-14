@@ -91,3 +91,34 @@ def generate_password_reset():
     password_reset.email()
 
     return jsonify({"success": True})
+
+
+@auth.route("/password_reset", methods=["GET"])
+def get_password_reset():
+    fields_missing = require_values(
+        request.json, ["email", "key", "password", "confirm_password"]
+    )
+
+    if len(fields_missing) == 3 and "key" not in request.json:
+        valid_key = PasswordReset.valid_key(request.json["key"])
+        return jsonify({"success": True, "data": {"valid_key": valid_key}})
+
+    if len(fields_missing):
+        return jsonify({"errors": {"fields_missing": fields_missing}})
+
+    password_reset = PasswordReset.valid_key(
+        key=request.json["key"], email=request.json["email"], get_obj=True
+    )
+    if not password_reset:
+        return jsonify({"errors": {"invalid_key": True}})
+
+    errors = {}
+    password, confirm_password = (
+        request.json["password"],
+        request.json["confirm_password"],
+    )
+    if password != confirm_password:
+        errors["password_mismatch"] = True
+    pass_invalid = User.validate_pass(password)
+    if len(pass_invalid):
+        errors["pass_errors"] = pass_invalid

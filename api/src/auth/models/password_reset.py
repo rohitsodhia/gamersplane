@@ -30,3 +30,14 @@ class PasswordReset(models.Model):
             reset_link="http://gamersplane.com/login/resetPass/" + self.key,
         )
         send_email(self.email, "Password reset for Gamers' Plane", email_content)
+
+    @staticmethod
+    def valid_key(key, email=None, get_obj=False):
+        password_reset = PasswordReset.objects.filter(key=key, used=False)
+        if email:
+            user = User.objects.get(email=email)
+            password_reset = password_reset.filter(user=user)
+
+        if get_obj:
+            return password_reset[0]
+        return True if password_reset else False
