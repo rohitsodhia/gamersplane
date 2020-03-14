@@ -45,9 +45,9 @@ def register():
     username = request.json["username"]
     password = request.json["password"]
     if password:
-        pass_valid = User.validate_pass(password)
-        if pass_valid is not True:
-            errors[f"pass_{pass_valid}"] = True
+        pass_invalid = User.validate_pass(password)
+        if len(pass_invalid):
+            errors["pass_errors"] = pass_invalid
 
     if len(errors):
         return jsonify({"errors": errors})

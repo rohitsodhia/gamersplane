@@ -41,11 +41,14 @@ class User(models.Model):
     suspendedUntil = models.DateTimeField(null=True)
     banned = models.BooleanField(default=False)
 
+    MIN_PASSWORD_LENGTH = 8
+
     @staticmethod
     def validate_pass(password):
-        if len(password) < 8:
-            return "too_short"
-        return True
+        invalid = []
+        if len(password) < User.MIN_PASSWORD_LENGTH:
+            invalid.append("pass_too_short")
+        return invalid
 
     @classmethod
     def register(cls, email, username, password):
