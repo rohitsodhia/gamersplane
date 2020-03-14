@@ -60,10 +60,13 @@ class User(models.Model):
     @staticmethod
     def hash_pass(password):
         hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-        return hashed
+        return hashed.decode("utf-8")
 
     def set_password(self, password):
-        self.password = self.hash_pass(password).decode("utf-8")
+        pass_valid = User.validate_pass(password)
+        if pass_valid == []:
+            self.password = self.hash_pass(password)
+        return False
 
     def check_pass(self, password):
         return bcrypt.checkpw(password.encode("utf-8"), self.password.encode("utf-8"))

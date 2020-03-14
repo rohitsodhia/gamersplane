@@ -4,5 +4,25 @@ from auth.models import User
 
 
 class TestUser:
+    VALID_PASS = "abcdefgh"
+
     def test_valid_pass(self):
-        assert User.validate_pass("abcdefgh")
+        assert User.validate_pass(self.VALID_PASS) == []
+
+    def test_short_pass(self):
+        assert User.validate_pass("abcd") == ["pass_too_short"]
+
+    def test_hash_pass(self):
+        assert type(User.hash_pass(self.VALID_PASS)) == str
+
+    def test_set_password(self):
+        user = User()
+        assert user.password == ""
+        user.set_password(self.VALID_PASS)
+        assert user.password != ""
+        assert type(user.password) == str
+
+    def test_check_password(self):
+        user = User()
+        user.set_password(self.VALID_PASS)
+        assert user.check_pass(self.VALID_PASS)
