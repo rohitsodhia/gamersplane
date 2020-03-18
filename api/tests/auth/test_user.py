@@ -6,10 +6,10 @@ from auth.models import User
 class TestUser:
     VALID_PASS = "abcdefgh"
 
-    def test_valid_pass(self):
+    def test_validate_pass(self):
         assert User.validate_pass(self.VALID_PASS) == []
 
-    def test_short_pass(self):
+    def test_validate_short_pass(self):
         assert User.validate_pass("abcd") == ["pass_too_short"]
 
     def test_hash_pass(self):
