@@ -20,7 +20,7 @@ class PasswordReset(models.Model):
 
     def generate_key(self):
         if self.key:
-            pass
+            return
         lettersAndDigits = string.ascii_letters + string.digits
         self.key = "".join(random.choices(lettersAndDigits, k=16))
 
