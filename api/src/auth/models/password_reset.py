@@ -36,8 +36,7 @@ class PasswordReset(models.Model):
     def valid_key(key, email=None, get_obj=False):
         password_reset = PasswordReset.objects.filter(key=key, used=False)
         if email:
-            user = User.objects.get(email=email)
-            password_reset = password_reset.filter(user=user)
+            password_reset = password_reset.filter(user__email=email)
 
         if get_obj:
             return password_reset[0]
