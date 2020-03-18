@@ -1,5 +1,6 @@
 import random
 import string
+from datetime import datetime
 
 from django.db import models
 
@@ -16,7 +17,7 @@ class PasswordReset(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     requestedOn = models.DateTimeField(auto_now=True)
     key = models.CharField(max_length=16)
-    used = models.BooleanField(default=False)
+    used = models.DateTimeField(null=True, default=None)
 
     def generate_key(self):
         if self.key:
@@ -41,3 +42,6 @@ class PasswordReset(models.Model):
         if get_obj:
             return password_reset[0]
         return True if password_reset else False
+
+    def use(self):
+        self.used = datetime.now()

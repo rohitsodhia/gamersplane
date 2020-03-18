@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ),
                 ("requestedOn", models.DateTimeField(auto_now=True)),
                 ("key", models.CharField(max_length=16)),
-                ("used", models.BooleanField(default=False)),
+                ("used", models.DateTimeField(null=True, default=None)),
                 (
                     "user",
                     models.ForeignKey(
