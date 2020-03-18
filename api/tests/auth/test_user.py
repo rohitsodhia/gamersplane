@@ -22,6 +22,12 @@ class TestUser:
         assert user.password != ""
         assert type(user.password) == str
 
+    def test_set_bad_password(self):
+        user = User()
+        assert user.password == ""
+        valid = user.set_password("asdf")
+        assert not valid
+
     def test_check_password(self):
         user = User()
         user.set_password(self.VALID_PASS)

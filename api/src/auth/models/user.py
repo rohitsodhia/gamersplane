@@ -66,6 +66,7 @@ class User(models.Model):
         pass_valid = User.validate_pass(password)
         if pass_valid == []:
             self.password = self.hash_pass(password)
+            return True
         return False
 
     def check_pass(self, password):
