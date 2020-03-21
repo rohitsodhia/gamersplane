@@ -129,6 +129,9 @@ def reset_password():
     if len(pass_invalid):
         errors["pass_errors"] = pass_invalid
 
+    if errors:
+        return jsonify({"errors": errors})
+
     user = password_reset.user
     user.set_password(password)
     user.save()
