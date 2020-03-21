@@ -83,8 +83,9 @@ def generate_password_reset():
     if not user:
         return jsonify({"errors": {"no_account": True}})
 
-    password_reset = PasswordReset.objects.get(user=user, used=False)
-    if not password_reset:
+    try:
+        password_reset = PasswordReset.objects.get(user=user, used__isnull=True)
+    except PasswordReset.DoesNotExist:
         password_reset = PasswordReset(user=user)
         password_reset.generate_key()
         password_reset.save()

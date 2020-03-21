@@ -34,7 +34,7 @@ class PasswordReset(models.Model):
 
     @staticmethod
     def valid_key(key, email=None, get_obj=False):
-        password_reset = PasswordReset.objects.filter(key=key, used=False)
+        password_reset = PasswordReset.objects.filter(key=key, used__isnull=True)
         if email:
             password_reset = password_reset.filter(user__email=email)
 
