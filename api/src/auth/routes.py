@@ -96,26 +96,32 @@ def generate_password_reset():
 
 @auth.route("/password_reset", methods=["GET"])
 def get_password_reset():
+    fields_missing = require_values(request.args, ["email", "key"])
+
+    valid_key = PasswordReset.valid_key(
+        key=request.args.get("key"), email=request.args.get("email")
+    )
+    return jsonify({"success": True, "data": {"valid_key": valid_key}})
+
+
+@auth.route("/password_reset", methods=["PATCH"])
+def reset_password():
     fields_missing = require_values(
-        request.args, ["email", "key", "password", "confirm_password"]
+        request.json, ["email", "key", "password", "confirm_password"]
     )
-
-    password_reset = PasswordReset.valid_key(
-        key=request.args.get("key"), email=request.args.get("email"), get_obj=True
-    )
-    if "validate" in request.args:
-        valid_key = True if password_reset else False
-        return jsonify({"success": True, "data": {"valid_key": valid_key}})
-
     if len(fields_missing):
         return jsonify({"errors": {"fields_missing": fields_missing}})
+
+    password_reset = PasswordReset.valid_key(
+        key=request.json.get("key"), email=request.json.get("email"), get_obj=True
+    )
     if not password_reset:
         return jsonify({"errors": {"invalid_key": True}})
 
     errors = {}
     password, confirm_password = (
-        request.args["password"],
-        request.args["confirm_password"],
+        request.json["password"],
+        request.json["confirm_password"],
     )
     if password != confirm_password:
         errors["password_mismatch"] = True
