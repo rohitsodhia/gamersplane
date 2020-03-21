@@ -39,7 +39,7 @@ class PasswordReset(models.Model):
             password_reset = password_reset.filter(user__email=email)
 
         if get_obj:
-            return password_reset[0]
+            return password_reset[0] if password_reset else None
         return True if password_reset else False
 
     def use(self):
