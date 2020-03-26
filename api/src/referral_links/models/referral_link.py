@@ -1,6 +1,11 @@
 from django.db import models
 
 
+class EnabledReferralLinksManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(enabled=True)
+
+
 class ReferralLink(models.Model):
     class Meta:
         db_table = "referral_links"
@@ -10,3 +15,6 @@ class ReferralLink(models.Model):
     link = models.CharField(max_length=100)
     order = models.IntegerField(unique=True)
     enabled = models.BooleanField(default=True)
+
+    objects = EnabledReferralLinksManager()
+    all_objects = models.Manager()
