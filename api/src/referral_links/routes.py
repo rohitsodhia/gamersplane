@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify
-from django.db import connection
 
 referral_links = Blueprint("referral_links", __name__)
 

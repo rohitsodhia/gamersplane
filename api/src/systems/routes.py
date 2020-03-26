@@ -1,6 +1,4 @@
-import json
 from flask import Blueprint, jsonify, request
-from django.db import connection
 
 from systems.models import System
 
