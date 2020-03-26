@@ -2,6 +2,14 @@ from django.db.models import Model, CharField, BooleanField, DateTimeField, Mana
 from django_mysql.models import JSONField
 
 
+class EnabledSystemsManager(Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(enabled=True)
+
+    def basic(self):
+        return self.get_queryset().only("id", "name", "sortName")
+
+
 class System(Model):
     class Meta:
         db_table = "systems"
@@ -19,8 +27,3 @@ class System(Model):
 
     objects = EnabledSystemsManager()
     all_objects = Manager()
-
-
-class EnabledSystemsManager(Manager):
-    def get_queryset(self):
-        return super().get_queryset().filter(enabled=True)

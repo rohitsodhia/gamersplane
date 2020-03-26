@@ -11,5 +11,6 @@ systems = Blueprint("systems", __name__)
 def get_systems():
     systems = System.objects
     if request.values.get("basic"):
-        systems = systems.only("id", "name", "sortName")
-    return jsonify({"data": {"systems": systems}})
+        systems = systems.basic()
+    systems = systems.order_by("sortName").values()
+    return jsonify({"data": {"systems": [system for system in systems]}})
