@@ -97,6 +97,8 @@ def generate_password_reset():
 @auth.route("/password_reset", methods=["GET"])
 def get_password_reset():
     fields_missing = require_values(request.args, ["email", "key"])
+    if len(fields_missing):
+        return jsonify({"errors": {"fields_missing": fields_missing}})
 
     valid_key = PasswordReset.valid_key(
         key=request.args.get("key"), email=request.args.get("email")
