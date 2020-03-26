@@ -9,3 +9,4 @@ class ReferralLink(models.Model):
     title = models.CharField(max_length=100)
     link = models.CharField(max_length=100)
     order = models.IntegerField(unique=True)
+    enabled = models.BooleanField(default=True)

@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ("title", models.CharField(max_length=100)),
                 ("link", models.CharField(max_length=100)),
                 ("order", models.IntegerField(unique=True)),
+                ("enabled", models.BooleanField(default=True)),
             ],
             options={"db_table": "referral_links"},
         )
