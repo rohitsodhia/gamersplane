@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField, BooleanField, DateTimeField
+from django.db.models import Model, CharField, BooleanField, DateTimeField, Manager
 from django_mysql.models import JSONField
 
 
@@ -16,3 +16,11 @@ class System(Model):
     enabled = BooleanField(default=True)
     createdOn = DateTimeField(auto_now_add=True)
     updatedOn = DateTimeField(auto_now=True)
+
+    objects = EnabledSystemsManager()
+    all_objects = Manager()
+
+
+class EnabledSystemsManager(Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(enabled=True)
