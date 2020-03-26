@@ -1,7 +1,8 @@
-import os
-import hashlib
 import bcrypt
+import datetime
+import hashlib
 import jwt
+import os
 
 from django.db import models
 
@@ -84,5 +85,10 @@ class User(models.Model):
 
     def generate_jwt(self):
         return jwt.encode(
-            {"user_id": self.userID}, os.getenv("JWT_SECRET_KEY"), algorithm="HS256"
+            {
+                "user_id": self.id,
+                "exp": datetime.datetime.utcnow() + datetime.timedelta(weeks=2),
+            },
+            os.getenv("JWT_SECRET_KEY"),
+            algorithm=os.getenv("JWT_ALGORITHM"),
         ).decode("utf-8")
