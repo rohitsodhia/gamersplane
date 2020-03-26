@@ -12,25 +12,17 @@ auth = Blueprint("auth", __name__, url_prefix="/auth")
 
 @auth.route("/login", methods=["POST"])
 def login():
-    try:
-        email = request.json["email"]
-    except KeyError:
-        return jsonify({"errors": {"no_email": True}})
-    with connection.cursor() as dbc:
-        users = User.objects.raw(
-            "SELECT * FROM users WHERE email = %(email)s", params={"email": email}
-        )
-        if users:
-            user = users[0]
-            try:
-                password = request.json["password"]
-            except KeyError:
-                return jsonify({"errors": {"no_password": True}})
-            if user.check_pass(password):
-                return jsonify(
-                    {"data": {"logged_in": True, "jwt": user.generate_jwt()}}
-                )
-        return jsonify({"errors": {"invalid_user": True}})
+    fields_missing = require_values(request.json, ["email", "password"])
+    if len(fields_missing):
+        return jsonify({"errors": {"fields_missing": fields_missing}})
+
+    email = request.json["email"]
+    user = User.objects.get(email=email)
+    if user:
+        password = request.json["password"]
+        if user.check_pass(password):
+            return jsonify({"data": {"logged_in": True, "jwt": user.generate_jwt()}})
+    return jsonify({"errors": {"invalid_user": True}})
 
 
 @auth.route("/register", methods=["POST"])
