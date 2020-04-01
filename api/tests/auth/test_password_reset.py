@@ -1,5 +1,3 @@
-from mock import patch
-
 from auth.models import PasswordReset
 
 
