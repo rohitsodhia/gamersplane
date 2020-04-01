@@ -1,4 +1,4 @@
-def require_values(data_obj, fields=[]):
+def require_values(data_obj, fields):
     missing_fields = []
     for key in fields:
         if key not in data_obj or not data_obj[key]:
