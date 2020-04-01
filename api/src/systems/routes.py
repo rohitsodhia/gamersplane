@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 
+from helpers.response import response
 from systems.models import System
 
 systems = Blueprint("systems", __name__)
@@ -11,4 +12,5 @@ def get_systems():
     if request.values.get("basic"):
         systems = systems.basic()
     systems = systems.order_by("sortName").values()
-    return jsonify({"data": {"systems": [system for system in systems]}})
+
+    return response.success({"data": {"systems": [system for system in systems]}})
