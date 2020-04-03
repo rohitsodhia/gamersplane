@@ -1,8 +1,9 @@
 class Response:
-    _success = False
-    _data = {}
-    _errors = {}
-    _response_code = 200
+    def __init__(self):
+        self._success = False
+        self._data = {}
+        self._errors = {}
+        self._response_code = 200
 
     def set_success(self, success):
         self._success = success
