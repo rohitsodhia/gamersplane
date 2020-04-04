@@ -1,4 +1,5 @@
 import django_conf
+from random import seed
 
 from flask import Flask, jsonify
 from flask_cors import CORS
@@ -7,6 +8,8 @@ import middleware
 from referral_links.routes import referral_links
 from systems.routes import systems
 from auth.routes import auth
+
+seed()
 
 app = Flask(__name__)
 CORS(app, origins="*")
