@@ -1,8 +1,9 @@
 from django.db import models
 from django_mysql.models import JSONField
+from helpers.base_models import TimestampedModel, SoftDeleteModel, SoftDeleteManager
 
 
-class EnabledSystemsManager(models.Manager):
+class EnabledSystemsManager(SoftDeleteManager):
     def get_queryset(self):
         return super().get_queryset().filter(enabled=True)
 
@@ -10,7 +11,7 @@ class EnabledSystemsManager(models.Manager):
         return self.get_queryset().only("id", "name", "sortName")
 
 
-class System(models.Model):
+class System(SoftDeleteModel, TimestampedModel):
     class Meta:
         db_table = "systems"
 
@@ -22,8 +23,6 @@ class System(models.Model):
     basics = JSONField(null=True)
     hasCharSheet = models.BooleanField(default=True)
     enabled = models.BooleanField(default=True)
-    createdOn = models.DateTimeField(auto_now_add=True)
-    updatedOn = models.DateTimeField(auto_now=True)
 
     objects = EnabledSystemsManager()
     all_objects = models.Manager()
