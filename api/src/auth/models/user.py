@@ -5,12 +5,13 @@ import jwt
 import os
 
 from django.db import models
+from helpers.base_models import SoftDeleteModel
 
 from envs import DOMAIN
 from helpers.email import get_template, send_email
 
 
-class User(models.Model):
+class User(SoftDeleteModel):
     class Meta:
         db_table = "users"
 
@@ -25,7 +26,7 @@ class User(models.Model):
     enableFilter = models.BooleanField(default=True)
     showAvatars = models.BooleanField(default=True)
     avatarExt = models.CharField(max_length=3, null=True)
-    timezone = models.CharField(max_length=20, default="Europe/London")
+    timezone = models.CharField(max_length=20, default="GMT")
     showTZ = models.BooleanField(null=True)
     realName = models.CharField(max_length=50, null=True)
     gender = models.CharField(max_length=1, null=True)

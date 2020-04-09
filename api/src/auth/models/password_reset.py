@@ -5,7 +5,6 @@ from datetime import datetime
 from django.db import models
 
 from auth.models import User
-
 from helpers.email import get_template, send_email
 
 
@@ -14,8 +13,8 @@ class PasswordReset(models.Model):
         db_table = "password_resets"
         indexes = [models.Index(fields=["key"])]
 
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
-    requestedOn = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, db_column="userId", on_delete=models.PROTECT)
+    requestedOn = models.DateTimeField(auto_now_add=True)
     key = models.CharField(max_length=16)
     used = models.DateTimeField(null=True, default=None)
 
