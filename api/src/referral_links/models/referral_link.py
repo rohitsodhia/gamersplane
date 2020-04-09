@@ -1,12 +1,13 @@
 from django.db import models
+from helpers.base_models import SoftDeleteModel, SoftDeleteManager
 
 
-class EnabledReferralLinksManager(models.Manager):
+class EnabledReferralLinksManager(SoftDeleteManager):
     def get_queryset(self):
         return super().get_queryset().filter(enabled=True)
 
 
-class ReferralLink(models.Model):
+class ReferralLink(SoftDeleteModel):
     class Meta:
         db_table = "referral_links"
 
