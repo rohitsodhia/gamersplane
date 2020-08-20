@@ -43,6 +43,8 @@ class User(SoftDeleteModel):
     suspendedUntil = models.DateTimeField(null=True)
     banned = models.BooleanField(default=False)
 
+    roles = models.ManyToManyField("auth.Role", related_name="users")
+
     MIN_PASSWORD_LENGTH = 8
 
     @staticmethod
