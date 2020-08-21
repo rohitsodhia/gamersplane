@@ -4,16 +4,16 @@ from django.db import models
 
 class SoftDeleteQuerySet(models.QuerySet):
     def delete(self):
-        return super().update(deleted_at=datetime.utcnow())
+        return super().update(deletedAt=datetime.utcnow())
 
     def hard_delete(self):
         return super().delete()
 
     def alive(self):
-        return self.filter(deleted_at=None)
+        return self.filter(deletedAt=None)
 
     def dead(self):
-        return self.exclude(deleted_at=None)
+        return self.exclude(deletedAt=None)
 
 
 class SoftDeleteManager(models.Manager):
