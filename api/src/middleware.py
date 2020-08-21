@@ -15,14 +15,14 @@ def initialize():
 def validate_jwt():
     g.user = None
 
-    jwt_token = request.headers.get("Authorization")
-    if jwt_token:
-        jwt_token = jwt_token[7:]
+    token = request.headers.get("Authorization")
+    if token[:7] != "Bearer ":
+        return
+    if token:
+        token = token[7:]
         try:
             jwt_body = jwt.decode(
-                jwt_token,
-                os.getenv("JWT_SECRET_KEY"),
-                algorithm=os.getenv("JWT_ALGORITHM"),
+                token, os.getenv("JWT_SECRET_KEY"), algorithm=os.getenv("JWT_ALGORITHM")
             )
         except jwt.ExpiredSignatureError:
             return
