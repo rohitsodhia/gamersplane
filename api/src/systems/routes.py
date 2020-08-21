@@ -3,10 +3,10 @@ from flask import Blueprint, request
 from helpers.response import response
 from systems.models import System
 
-systems = Blueprint("systems", __name__)
+systems = Blueprint("systems", __name__, url_prefix="/systems")
 
 
-@systems.route("/systems", methods=["GET"])
+@systems.route("/", methods=["GET"])
 def get_systems():
     systems = System.objects
     if request.values.get("basic"):
