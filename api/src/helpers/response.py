@@ -44,5 +44,10 @@ class Response:
     def errors(self, errors, response_code=200):
         return self.build(errors=errors, success=False, response_code=response_code)
 
+    def unauthorized(self, errors=None):
+        if not errors:
+            errors = {"unauthorized": True}
+        return self.errors(errors=errors, response_code=401)
+
 
 response = Response()
