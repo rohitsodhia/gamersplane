@@ -18,7 +18,10 @@ def login():
         return response.errors({"fields_missing": fields_missing})
 
     email = request.json["email"]
-    user = User.objects.get(email=email)
+    try:
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
+        user = None
     if user:
         password = request.json["password"]
         if user.check_pass(password):
@@ -58,7 +61,7 @@ def register():
                 if reg_username == username:
                     errors["username_taken"] = True
             if len(errors):
-                return jsonify({"errors": errors})
+                return response.errors({"errors": errors})
 
         User.register(email=email, username=username, password=password)
 
