@@ -1,5 +1,8 @@
 class Response:
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self._success = False
         self._data = {}
         self._errors = {}

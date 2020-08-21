@@ -3,7 +3,13 @@ import jwt
 
 from flask import g, request
 
+from helpers.response import response
+
 from auth.models import User
+
+
+def initialize():
+    response.reset()
 
 
 def validate_jwt():

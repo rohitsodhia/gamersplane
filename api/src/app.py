@@ -14,6 +14,7 @@ seed()
 app = Flask(__name__)
 CORS(app, origins="*")
 
+app.before_request(middleware.initialize)
 app.before_request(middleware.validate_jwt)
 
 app.register_blueprint(referral_links)
