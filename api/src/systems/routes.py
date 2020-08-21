@@ -13,4 +13,4 @@ def get_systems():
         systems = systems.basic()
     systems = systems.order_by("sortName").values()
 
-    return response.success({"data": {"systems": [system for system in systems]}})
+    return response.success({"systems": [system for system in systems]})
