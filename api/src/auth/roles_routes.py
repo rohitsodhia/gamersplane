@@ -11,7 +11,7 @@ from auth.models import User
 roles = Blueprint("roles", __name__, url_prefix="/roles")
 
 
-@roles.route("/password_reset", methods=["PATCH"])
+@roles.route("/", methods=["PATCH"])
 @logged_in
 def list_roles():
     pass
