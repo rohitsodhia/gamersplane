@@ -23,4 +23,4 @@ ENV DJANGO_SETTINGS_MODULE='django_conf'
 
 # ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 
-CMD [ "gunicorn", "app:app", "--bind", "0.0.0.0:8000" ]
+CMD [ "gunicorn", "app:create_app()", "--bind", "0.0.0.0:8000" ]

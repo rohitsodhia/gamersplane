@@ -17,16 +17,17 @@ from auth.roles_routes import roles
 
 seed()
 
-app = Flask(__name__)
-CORS(app, origins="*")
 
-app.before_request(middleware.initialize)
-app.before_request(middleware.validate_jwt)
+def create_app():
+    app = Flask(__name__)
+    CORS(app, origins="*")
 
-app.register_blueprint(referral_links)
-app.register_blueprint(systems)
-app.register_blueprint(auth)
-app.register_blueprint(roles)
+    app.before_request(middleware.initialize)
+    app.before_request(middleware.validate_jwt)
 
-if __name__ == "__main__":
-    app.run()
+    app.register_blueprint(referral_links)
+    app.register_blueprint(systems)
+    app.register_blueprint(auth)
+    app.register_blueprint(roles)
+
+    return app
