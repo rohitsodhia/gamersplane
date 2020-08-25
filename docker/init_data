@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker exec -w /usr/src/scripts gamersplane-api './clear_db'
+docker exec -w /usr/src/app/src gamersplane-api ./manage.py migrate
+docker exec -w /usr/src/scripts gamersplane-api './populate_db'
