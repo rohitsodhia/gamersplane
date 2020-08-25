@@ -1,21 +1,17 @@
 import os
-import django
-from django.conf import settings
 
 from django_apps import apps
 
 
-settings.configure(
-    DATABASES={
-        "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": os.getenv("MYSQL_DATABASE"),
-            "USER": os.getenv("MYSQL_USER"),
-            "PASSWORD": os.getenv("MYSQL_PASSWORD"),
-            "HOST": os.getenv("MYSQL_HOST"),
-            "PORT": "3306",
-        }
-    },
-    INSTALLED_APPS=apps,
-)
-django.setup()
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.getenv("MYSQL_DATABASE"),
+        "USER": os.getenv("MYSQL_USER"),
+        "PASSWORD": os.getenv("MYSQL_PASSWORD"),
+        "HOST": os.getenv("MYSQL_HOST"),
+        "PORT": "3306",
+    }
+}
+INSTALLED_APPS = apps

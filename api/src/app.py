@@ -1,4 +1,9 @@
-import django_conf
+if __name__ == "app":
+    import django
+
+    django.setup()
+
+
 from random import seed
 
 from flask import Flask, jsonify
