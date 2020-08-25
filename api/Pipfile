@@ -7,6 +7,8 @@ verify_ssl = true
 python_version = "3.7"
 
 [dev-packages]
+pdbpp = "*"
+ipdb = "*"
 
 [packages]
 flask = "*"
@@ -23,7 +25,5 @@ mysqlclient = "*"
 django-mysql = "*"
 mock = "*"
 pytest-django = "*"
-pdbpp = "*"
-ipdb = "*"
 jinja2 = "*"
 faker = "*"
