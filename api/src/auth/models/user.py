@@ -84,7 +84,7 @@ class User(SoftDeleteModel):
 
     def send_activation_email(self):
         email_content = get_template(
-            "auth/templates/activation.html", username=self.username
+            "auth/templates/activation.html", activation_link=self.get_activation_link()
         )
         send_email(self.email, "Activate your Gamers' Plane account!", email_content)
 
