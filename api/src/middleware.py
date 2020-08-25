@@ -27,5 +27,8 @@ def validate_jwt():
         except jwt.ExpiredSignatureError:
             return
 
-        user = User.objects.get(id=jwt_body["user_id"])
+        try:
+            user = User.objects.get(id=jwt_body["user_id"])
+        except User.DoesNotExist:
+            return
         g.user = user
