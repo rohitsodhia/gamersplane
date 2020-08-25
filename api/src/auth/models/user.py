@@ -77,8 +77,10 @@ class User(SoftDeleteModel):
         return bcrypt.checkpw(password.encode("utf-8"), self.password.encode("utf-8"))
 
     def get_activation_link(self):
-        user_hash = hashlib.md5(str(self.username) + str(self.joinDate))
-        return f"{DOMAIN}/register/activate/{user_hash}"
+        user_hash = hashlib.md5(
+            str(self.username).encode("utf-8") + str(self.joinDate).encode("utf-8")
+        )
+        return f"{DOMAIN}/register/activate/{user_hash.hexdigest()}"
 
     def send_activation_email(self):
         email_content = get_template(
