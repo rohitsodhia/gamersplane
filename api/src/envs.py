@@ -2,7 +2,7 @@ import os
 
 ENVIRONMENT = os.getenv("FLASK_ENV", "dev")
 
-DOMAIN = os.getenv("DOMAIN")
+SERVER_NAME = os.getenv("SERVER_NAME")
 
 MYSQL_HOST = os.getenv("MYSQL_HOST")
 MYSQL_USER = os.getenv("MYSQL_USER")

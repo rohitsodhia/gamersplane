@@ -7,7 +7,7 @@ import os
 from django.db import models
 from helpers.base_models import SoftDeleteModel
 
-from envs import DOMAIN
+from envs import SERVER_NAME
 from helpers.email import get_template, send_email
 
 
@@ -80,7 +80,7 @@ class User(SoftDeleteModel):
         user_hash = hashlib.md5(
             str(self.username).encode("utf-8") + str(self.joinDate).encode("utf-8")
         )
-        return f"{DOMAIN}/register/activate/{user_hash.hexdigest()}"
+        return f"{SERVER_NAME}/register/activate/{user_hash.hexdigest()}"
 
     def send_activation_email(self):
         email_content = get_template(
