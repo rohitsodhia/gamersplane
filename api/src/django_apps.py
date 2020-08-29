@@ -1,1 +1,1 @@
-apps = ["auth", "referral_links", "systems", "tools"]
+apps = ["auth", "referral_links", "systems", "tokens", "tools"]
