@@ -7,7 +7,7 @@ import os
 from django.db import models
 from helpers.base_models import SoftDeleteModel
 
-from envs import SERVER_NAME
+from envs import SERVER_NAME, JWT_ALGORITHM, JWT_SECRET_KEY
 from helpers.email import get_template, send_email
 
 
@@ -88,12 +88,14 @@ class User(SoftDeleteModel):
         )
         send_email(self.email, "Activate your Gamers' Plane account!", email_content)
 
-    def generate_jwt(self):
+    def generate_jwt(self, exp_len=None):
+        if not exp_len:
+            exp_len = {"weeks": 2}
         return jwt.encode(
             {
                 "user_id": self.id,
-                "exp": datetime.datetime.utcnow() + datetime.timedelta(weeks=2),
+                "exp": datetime.datetime.utcnow() + datetime.timedelta(**exp_len),
             },
-            os.getenv("JWT_SECRET_KEY"),
-            algorithm=os.getenv("JWT_ALGORITHM"),
+            JWT_SECRET_KEY,
+            algorithm=JWT_ALGORITHM,
         ).decode("utf-8")
