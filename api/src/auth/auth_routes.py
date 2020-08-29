@@ -5,8 +5,10 @@ from django.db import connection
 
 from helpers.response import response
 from helpers.endpoint import require_values
+from helpers.email import get_template, send_email
 
-from auth.models import User, PasswordReset
+from auth.models import User
+from tokens.models import Token
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -80,12 +82,18 @@ def generate_password_reset():
         return response.errors({"no_account": True})
 
     try:
-        password_reset = PasswordReset.objects.get(user=user, used__isnull=True)
-    except PasswordReset.DoesNotExist:
-        password_reset = PasswordReset(user=user)
-        password_reset.generate_key()
+        password_reset = Token.objects.get(
+            user=user, token_type=Token.TokenTypes.PASSWORD_RESET, used__isnull=True
+        )
+    except Token.DoesNotExist:
+        password_reset = Token(user=user)
+        password_reset.generate_token()
         password_reset.save()
-    password_reset.email()
+    email_content = get_template(
+        "auth/templates/reset_password.html",
+        reset_link="http://gamersplane.com/auth/resetPass/" + password_reset.token,
+    )
+    send_email(email, "Password reset for Gamers' Plane", email_content)
 
     return response.success({})
 
