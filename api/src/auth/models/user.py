@@ -11,7 +11,18 @@ from envs import SERVER_NAME, JWT_ALGORITHM, JWT_SECRET_KEY
 from helpers.email import get_template, send_email
 
 
-class User(SoftDeleteModel):
+class UserManager(models.Manager):
+    def __init__(self, *args, **kwargs):
+        self.banned = kwargs.pop("banned", False)
+        super().__init__(*args, **kwargs)
+
+    def get_queryset(self):
+        if self.banned:
+            return models.QuerySet(self.model)
+        return models.QuerySet(self.model).filter(banned=None)
+
+
+class User(models.Model):
     class Meta:
         db_table = "users"
 
@@ -41,9 +52,12 @@ class User(SoftDeleteModel):
     newGameMail = models.BooleanField(default=True)
     postSide = models.CharField(max_length=1, default="r")
     suspendedUntil = models.DateTimeField(null=True)
-    banned = models.BooleanField(default=False)
+    banned = models.DateTimeField(null=True)
 
     roles = models.ManyToManyField("auth.Role", related_name="users")
+
+    objects = UserManager()
+    all_objects = UserManager(banned=True)
 
     MIN_PASSWORD_LENGTH = 8
 
