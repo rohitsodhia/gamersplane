@@ -77,6 +77,8 @@ class User(SoftDeleteModel):
         return bcrypt.checkpw(password.encode("utf-8"), self.password.encode("utf-8"))
 
     def get_activation_link(self):
+        if not self.username or not self.joinDate:
+            raise ValueError
         user_hash = hashlib.md5(
             str(self.username).encode("utf-8") + str(self.joinDate).encode("utf-8")
         )
