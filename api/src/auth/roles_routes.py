@@ -6,12 +6,13 @@ from helpers.decorators import logged_in
 from helpers.response import response
 from helpers.endpoint import require_values
 
-from auth.models import User
+from auth.models import Role
 
 roles = Blueprint("roles", __name__, url_prefix="/roles")
 
 
-@roles.route("/", methods=["PATCH"])
-@logged_in
+@roles.route("/", methods=["GET"])
+@logged_in(permissions=["viewRoles"])
 def list_roles():
-    pass
+    roles = Role.objects.all()
+    return response.success({"roles": roles})
