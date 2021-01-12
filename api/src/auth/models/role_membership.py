@@ -1,5 +1,5 @@
 from django.db import models
-from helpers.base_models import TimestampedModel, SoftDeleteModel, SoftDeleteManager
+from helpers.base_models import TimestampedModel, SoftDeleteModel
 
 
 class RoleMembership(TimestampedModel, SoftDeleteModel):

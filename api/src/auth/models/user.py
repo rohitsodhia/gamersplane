@@ -54,7 +54,9 @@ class User(models.Model):
     suspendedUntil = models.DateTimeField(null=True)
     banned = models.DateTimeField(null=True)
 
-    roles = models.ManyToManyField("auth.Role", related_name="users")
+    roles = models.ManyToManyField(
+        "auth.Role", related_name="users", through="auth.RoleMembership"
+    )
 
     objects = UserManager()
     all_objects = UserManager(banned=True)
