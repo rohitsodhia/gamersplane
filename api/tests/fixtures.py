@@ -1,5 +1,7 @@
 import pytest
 
+from faker import Faker
+
 from app import create_app
 
 
@@ -11,3 +13,8 @@ def app():
     with app.app_context():
         with app.test_client() as client, app.test_request_context():
             yield client
+
+
+@pytest.fixture
+def faker():
+    return Faker()
