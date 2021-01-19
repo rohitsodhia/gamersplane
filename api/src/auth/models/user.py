@@ -2,10 +2,8 @@ import bcrypt
 import datetime
 import hashlib
 import jwt
-import os
 
 from django.db import models
-from helpers.base_models import SoftDeleteModel
 
 from envs import SERVER_NAME, JWT_ALGORITHM, JWT_SECRET_KEY
 from helpers.email import get_template, send_email
@@ -13,13 +11,17 @@ from helpers.email import get_template, send_email
 
 class UserManager(models.Manager):
     def __init__(self, *args, **kwargs):
+        self.inactive = kwargs.pop("inactive", False)
         self.banned = kwargs.pop("banned", False)
         super().__init__(*args, **kwargs)
 
     def get_queryset(self):
-        if self.banned:
-            return models.QuerySet(self.model)
-        return models.QuerySet(self.model).filter(banned=None)
+        queryset = models.QuerySet(self.model)
+        if not self.inactive:
+            queryset = queryset.filter(activatedOn__isnull=False)
+        if not self.banned:
+            queryset = queryset.filter(banned__isnull=True)
+        return queryset
 
 
 class User(models.Model):
@@ -59,7 +61,7 @@ class User(models.Model):
     )
 
     objects = UserManager()
-    all_objects = UserManager(banned=True)
+    all_objects = UserManager(inactive=True, banned=True)
 
     MIN_PASSWORD_LENGTH = 8
 
