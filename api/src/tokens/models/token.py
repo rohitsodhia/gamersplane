@@ -34,7 +34,8 @@ class Token(models.Model):
     class Meta:
         db_table = "tokens"
         indexes = [models.Index(fields=["token"])]
-        token_type = None
+
+    token_type = None
 
     class TokenTypes(models.TextChoices):
         ACCOUNT_ACTIVATION = "aa", "Account Activation"
@@ -56,8 +57,8 @@ class Token(models.Model):
     all_objects = TokenManager(available=False)
 
     def save(self, *args, **kwargs):
-        if self.Meta.token_type:
-            self.token_type = self.Meta.token_type
+        if self.token_type:
+            self.token_type = self.token_type
         super().save(*args, **kwargs)
 
     @staticmethod
