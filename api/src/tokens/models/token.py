@@ -40,9 +40,15 @@ class Token(models.Model):
         ACCOUNT_ACTIVATION = "aa", "Account Activation"
         PASSWORD_RESET = "pr", "Password Reset"
 
+    def generate_token(self):
+        if self.token:
+            return
+        lettersAndDigits = string.ascii_letters + string.digits
+        self.token = "".join(random.choices(lettersAndDigits, k=16))
+
     user = models.ForeignKey(User, db_column="userId", on_delete=models.PROTECT)
     token_type = models.CharField(max_length=2, choices=TokenTypes.choices)
-    token = models.CharField(max_length=16)
+    token = models.CharField(max_length=16, default=generate_token)
     requestedOn = models.DateTimeField(auto_now_add=True)
     used = models.DateTimeField(null=True, default=None)
 
