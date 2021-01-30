@@ -18,18 +18,23 @@ class TokenQuerySet(models.QuerySet):
 class TokenManager(models.Manager):
     def __init__(self, *args, **kwargs):
         self.available = kwargs.pop("available", True)
+        self.token_type = kwargs.pop("token_type", None)
         super().__init__(*args, **kwargs)
 
     def get_queryset(self):
+        queryset = TokenQuerySet(self.model)
+        if self.token_type:
+            queryset = queryset.filter(token_type=self.token_type)
         if self.available:
-            return TokenQuerySet(self.model).available()
-        return TokenQuerySet(self.model)
+            queryset = queryset.available()
+        return queryset
 
 
 class Token(models.Model):
     class Meta:
         db_table = "tokens"
         indexes = [models.Index(fields=["token"])]
+        token_type = None
 
     class TokenTypes(models.TextChoices):
         ACCOUNT_ACTIVATION = "aa", "Account Activation"
@@ -44,11 +49,10 @@ class Token(models.Model):
     objects = TokenManager()
     all_objects = TokenManager(available=False)
 
-    def generate_token(self):
-        if self.token:
-            return
-        lettersAndDigits = string.ascii_letters + string.digits
-        self.token = "".join(random.choices(lettersAndDigits, k=16))
+    def save(self, *args, **kwargs):
+        if self.Meta.token_type:
+            self.token_type = self.Meta.token_type
+        super().save(*args, **kwargs)
 
     @staticmethod
     def validate_token(token, email=None, get_obj=False):
