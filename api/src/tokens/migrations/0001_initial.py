@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                         max_length=2,
                     ),
                 ),
-                ("token", models.CharField(max_length=16)),
+                ("token", models.CharField(max_length=36)),
                 ("requestedOn", models.DateTimeField(auto_now_add=True)),
                 ("used", models.DateTimeField(default=None, null=True)),
                 (
