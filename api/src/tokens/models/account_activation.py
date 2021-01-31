@@ -5,4 +5,4 @@ class AccountActivation(Token):
     class Meta:
         proxy = True
 
-    token_type = Token.TokenTypes.ACCOUNT_ACTIVATION
+    model_token_type = Token.TokenTypes.ACCOUNT_ACTIVATION.value

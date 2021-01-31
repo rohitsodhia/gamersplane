@@ -36,15 +36,18 @@ class Token(models.Model):
         db_table = "tokens"
         indexes = [models.Index(fields=["token"])]
 
-    token_type = None
+    model_token_type = None
 
     class TokenTypes(models.TextChoices):
         ACCOUNT_ACTIVATION = "aa", "Account Activation"
         PASSWORD_RESET = "pr", "Password Reset"
 
+    def generate_token():
+        return str(uuid())
+
     user = models.ForeignKey(User, db_column="userId", on_delete=models.PROTECT)
     token_type = models.CharField(max_length=2, choices=TokenTypes.choices)
-    token = models.CharField(max_length=36, default=str(uuid()))
+    token = models.CharField(max_length=36, default=generate_token)
     requestedOn = models.DateTimeField(auto_now_add=True)
     used = models.DateTimeField(null=True, default=None)
 
@@ -52,8 +55,8 @@ class Token(models.Model):
     all_objects = TokenManager(available=False)
 
     def save(self, *args, **kwargs):
-        if self.token_type:
-            self.token_type = self.token_type
+        if self.model_token_type:
+            self.token_type = self.model_token_type
         super().save(*args, **kwargs)
 
     @staticmethod

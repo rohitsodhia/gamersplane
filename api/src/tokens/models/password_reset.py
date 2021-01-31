@@ -5,4 +5,4 @@ class PasswordReset(Token):
     class Meta:
         proxy = True
 
-    token_type = Token.TokenTypes.PASSWORD_RESET
+    model_token_type = Token.TokenTypes.PASSWORD_RESET.value
