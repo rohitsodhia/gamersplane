@@ -1,4 +1,5 @@
 from functools import wraps, partial
+from typing import Callable
 
 from flask import g
 
@@ -10,7 +11,7 @@ def logged_in(func=None, *, permissions=None):
         return partial(logged_in, permissions=None)
 
     @wraps(func)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args, **kwargs) -> Callable:
         if not g.User:
             response.unauthorized()
         if permissions:

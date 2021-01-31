@@ -17,7 +17,7 @@ password = os.getenv("EMAIL_PASSWORD")
 context = ssl.create_default_context()
 
 
-def get_template(template, **kwargs):
+def get_template(template: str, **kwargs) -> str:
     file_loader = FileSystemLoader(searchpath=ROOT_DIR)
     env = Environment(loader=file_loader)
 
@@ -27,7 +27,7 @@ def get_template(template, **kwargs):
     return output
 
 
-def send_email(to, subject, content):
+def send_email(to: str, subject: str, content: str) -> None:
     if ENVIRONMENT == "dev":
         return
 
