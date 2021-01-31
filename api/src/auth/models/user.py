@@ -66,28 +66,28 @@ class User(models.Model):
     MIN_PASSWORD_LENGTH = 8
 
     @staticmethod
-    def validate_pass(password):
+    def validate_pass(password: str) -> list:
         invalid = []
         if len(password) < User.MIN_PASSWORD_LENGTH:
             invalid.append("pass_too_short")
         return invalid
 
     @staticmethod
-    def hash_pass(password):
+    def hash_pass(password: str) -> str:
         hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
         return hashed.decode("utf-8")
 
-    def set_password(self, password):
+    def set_password(self, password: str) -> bool:
         pass_valid = User.validate_pass(password)
         if pass_valid == []:
             self.password = self.hash_pass(password)
             return True
         return False
 
-    def check_pass(self, password):
+    def check_pass(self, password: str) -> bool:
         return bcrypt.checkpw(password.encode("utf-8"), self.password.encode("utf-8"))
 
-    def get_activation_link(self):
+    def get_activation_link(self) -> str:
         if not self.username or not self.joinDate:
             raise ValueError
         user_hash = hashlib.md5(
@@ -95,13 +95,13 @@ class User(models.Model):
         )
         return f"{SERVER_NAME}/register/activate/{user_hash.hexdigest()}"
 
-    def send_activation_email(self):
+    def send_activation_email(self) -> None:
         email_content = get_template(
             "auth/templates/activation.html", activation_link=self.get_activation_link()
         )
         send_email(self.email, "Activate your Gamers' Plane account!", email_content)
 
-    def generate_jwt(self, exp_len=None):
+    def generate_jwt(self, exp_len: int = None) -> str:
         if not exp_len:
             exp_len = {"weeks": 2}
         return jwt.encode(
