@@ -72,13 +72,6 @@ class User(models.Model):
             invalid.append("pass_too_short")
         return invalid
 
-    @classmethod
-    def register(cls, email, username, password):
-        new_user = User(email=email, username=username)
-        new_user.set_password(password)
-        new_user.save()
-        new_user.send_activation_email()
-
     @staticmethod
     def hash_pass(password):
         hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())

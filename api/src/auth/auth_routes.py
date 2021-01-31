@@ -6,6 +6,7 @@ from helpers.endpoint import require_values
 from helpers.email import get_template, send_email
 
 from auth.models import User
+from auth.functions import register_user
 from tokens.models import Token
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
@@ -63,7 +64,9 @@ def register():
             if len(errors):
                 return response.errors({"errors": errors})
 
-        User.register(email=email, username=username, password=password)
+        new_user = User(email=email, username=username)
+        new_user.set_password(password)
+        register_user(new_user)
 
         return response.success({})
 
