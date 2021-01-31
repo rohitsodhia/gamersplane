@@ -1,6 +1,7 @@
 import random
 import string
 from datetime import datetime
+from typing import Union
 from uuid import uuid1 as uuid
 
 from django.db import models
@@ -60,7 +61,9 @@ class Token(models.Model):
         super().save(*args, **kwargs)
 
     @staticmethod
-    def validate_token(token, email=None, get_obj=False):
+    def validate_token(
+        token: str, email: str = None, get_obj: bool = False
+    ) -> Union[bool, object]:
         token = Token.objects.filter(token=token)
         if email:
             token = token.filter(user__email=email)
