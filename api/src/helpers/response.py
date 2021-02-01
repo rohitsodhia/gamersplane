@@ -2,6 +2,8 @@ from typing import Tuple
 
 
 class Response:
+    BuildReturnType = Tuple[object, int]
+
     def __init__(self):
         self.reset()
 
@@ -23,7 +25,7 @@ class Response:
     def set_response_code(self, response_code: int) -> None:
         self._response_code = response_code
 
-    def build(self, **kwargs) -> Tuple[object, int]:
+    def build(self, **kwargs) -> BuildReturnType:
         if kwargs.get("success"):
             self.set_success(kwargs["success"])
         if kwargs.get("data"):
@@ -41,13 +43,13 @@ class Response:
 
         return response, self._response_code
 
-    def success(self, data: object) -> Tuple[object, int]:
+    def success(self, data: object) -> BuildReturnType:
         return self.build(data=data, success=True, response_code=200)
 
-    def errors(self, errors: object, response_code: int = 200) -> Tuple[object, int]:
+    def errors(self, errors: object, response_code: int = 200) -> BuildReturnType:
         return self.build(errors=errors, success=False, response_code=response_code)
 
-    def unauthorized(self, errors: object = None) -> Tuple[object, int]:
+    def unauthorized(self, errors: object = None) -> BuildReturnType:
         if not errors:
             errors = {"unauthorized": True}
         return self.errors(errors=errors, response_code=401)
