@@ -1,7 +1,7 @@
 from tokens.models.token import Token
 
 
-class PasswordReset(Token):
+class PasswordResetToken(Token):
     class Meta:
         proxy = True
 

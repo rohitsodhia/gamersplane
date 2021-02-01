@@ -1,12 +1,10 @@
 import bcrypt
 import datetime
-import hashlib
 import jwt
 
 from django.db import models
 
-from envs import SERVER_NAME, JWT_ALGORITHM, JWT_SECRET_KEY
-from helpers.email import get_template, send_email
+from envs import JWT_ALGORITHM, JWT_SECRET_KEY
 
 
 class UserManager(models.Manager):
@@ -86,20 +84,6 @@ class User(models.Model):
 
     def check_pass(self, password: str) -> bool:
         return bcrypt.checkpw(password.encode("utf-8"), self.password.encode("utf-8"))
-
-    def get_activation_link(self) -> str:
-        if not self.username or not self.joinDate:
-            raise ValueError
-        user_hash = hashlib.md5(
-            str(self.username).encode("utf-8") + str(self.joinDate).encode("utf-8")
-        )
-        return f"{SERVER_NAME}/register/activate/{user_hash.hexdigest()}"
-
-    def send_activation_email(self) -> None:
-        email_content = get_template(
-            "auth/templates/activation.html", activation_link=self.get_activation_link()
-        )
-        send_email(self.email, "Activate your Gamers' Plane account!", email_content)
 
     def generate_jwt(self, exp_len: int = None) -> str:
         if not exp_len:

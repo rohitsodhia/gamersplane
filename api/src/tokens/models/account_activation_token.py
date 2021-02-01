@@ -1,7 +1,7 @@
 from tokens.models.token import Token
 
 
-class AccountActivation(Token):
+class AccountActivationToken(Token):
     class Meta:
         proxy = True
 

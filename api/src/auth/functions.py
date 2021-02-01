@@ -2,8 +2,10 @@ from typing import Union
 
 from django.db import connection
 
+from envs import SERVER_NAME
+from helpers.email import get_template, send_email
 from auth.models import User
-from tokens.models import AccountActivation
+from tokens.models import AccountActivationToken
 
 
 def check_for_existing_user(user: User) -> Union[object, None]:
@@ -25,6 +27,24 @@ def check_for_existing_user(user: User) -> Union[object, None]:
 
 def register_user(new_user: User) -> None:
     new_user.save()
-    account_activation_token = AccountActivation(user=new_user)
-    account_activation_token.save()
-    new_user.send_activation_email()
+    send_activation_email(new_user)
+
+
+def get_activation_link(user: User) -> str:
+    try:
+        token = AccountActivationToken.objects.get(user=user)
+    except AccountActivationToken.DoesNotExist:
+        token = AccountActivationToken(user=user)
+        token.save()
+
+    if not user.username or not user.joinDate:
+        raise ValueError
+
+    return f"{SERVER_NAME}/register/activate/{token.token}"
+
+
+def send_activation_email(user: User) -> None:
+    email_content = get_template(
+        "auth/templates/activation.html", activation_link=get_activation_link(user)
+    )
+    send_email(user.email, "Activate your Gamers' Plane account!", email_content)
