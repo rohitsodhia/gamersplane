@@ -37,7 +37,7 @@ def get_activation_link(user: User) -> str:
         token = AccountActivationToken(user=user)
         token.save()
 
-    if not user.username or not user.joinDate:
+    if not user.username:
         raise ValueError
 
     return f"{SERVER_NAME}/register/activate/{token.token}"
