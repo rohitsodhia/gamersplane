@@ -34,13 +34,3 @@ class TestUser:
         user = User()
         user.set_password(self.VALID_PASS)
         assert user.check_pass(self.VALID_PASS)
-
-    def test_get_activation_link(self, app, faker):
-        user = User()
-        user.username = faker.simple_profile()["username"]
-        user.joinDate = datetime.now()
-        generated_link = user.get_activation_link()
-        link_parts = generated_link.split("/")
-        assert link_parts[3] == "register"
-        assert link_parts[4] == "activate"
-        assert len(link_parts[5]) == 32
