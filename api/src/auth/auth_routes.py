@@ -1,12 +1,11 @@
 from flask import Blueprint, request
-from django.db import connection
 
 from helpers.response import response
 from helpers.endpoint import require_values
 from helpers.email import get_template, send_email
 
 from auth.models import User
-from auth.functions import register_user
+from auth import functions
 from tokens.models import Token
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
@@ -49,26 +48,15 @@ def register():
     if len(errors):
         return response.errors(errors)
 
-    with connection.cursor() as dbc:
-        dbc.execute(
-            "SELECT email, username FROM users WHERE email = %(email)s OR username = %(username)s",
-            {"email": email, "username": username},
-        )
-        if dbc.rowcount:
-            errors = {}
-            for reg_email, reg_username in dbc:
-                if reg_email == email:
-                    errors["email_taken"] = True
-                if reg_username == username:
-                    errors["username_taken"] = True
-            if len(errors):
-                return response.errors({"errors": errors})
+    new_user = User(email=email, username=username)
+    new_user.set_password(password)
+    errors = functions.check_for_existing_user(new_user)
+    if errors:
+        return response.errors({"errors": errors})
 
-        new_user = User(email=email, username=username)
-        new_user.set_password(password)
-        register_user(new_user)
+    functions.register_user(new_user)
 
-        return response.success({})
+    return response.success({})
 
 
 @auth.route("/password_reset", methods=["POST"])
