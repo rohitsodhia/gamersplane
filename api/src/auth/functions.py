@@ -32,15 +32,15 @@ def register_user(new_user: User) -> None:
 
 def get_activation_link(user: User) -> str:
     try:
-        token = AccountActivationToken.objects.get(user=user)
+        account_activation_token = AccountActivationToken.objects.get(user=user)
     except AccountActivationToken.DoesNotExist:
-        token = AccountActivationToken(user=user)
-        token.save()
+        account_activation_token = AccountActivationToken(user=user)
+        account_activation_token.save()
 
     if not user.username:
         raise ValueError
 
-    return f"{SERVER_NAME}/register/activate/{token.token}"
+    return f"{SERVER_NAME}/activate/{account_activation_token.token}"
 
 
 def send_activation_email(user: User) -> None:
