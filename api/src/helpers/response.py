@@ -43,7 +43,9 @@ class Response:
 
         return response, self._response_code
 
-    def success(self, data: object) -> BuildReturnType:
+    def success(self, data: object = None) -> BuildReturnType:
+        if not data:
+            data = {}
         return self.build(data=data, success=True, response_code=200)
 
     def errors(self, errors: object, response_code: int = 200) -> BuildReturnType:

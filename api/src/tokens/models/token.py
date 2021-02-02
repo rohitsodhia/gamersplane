@@ -52,8 +52,8 @@ class Token(models.Model):
     requestedOn = models.DateTimeField(auto_now_add=True)
     used = models.DateTimeField(null=True, default=None)
 
-    objects = TokenManager()
-    all_objects = TokenManager(available=False)
+    objects = TokenManager(token_type=model_token_type)
+    all_objects = TokenManager(token_type=model_token_type, available=False)
 
     def save(self, *args, **kwargs):
         if self.model_token_type:
@@ -71,3 +71,8 @@ class Token(models.Model):
         if get_obj:
             return token[0] if token else None
         return True if token else False
+
+    def use(self):
+        self.used = datetime.utcnow()
+        self.save()
+        return self

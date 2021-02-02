@@ -82,6 +82,11 @@ class User(models.Model):
             return True
         return False
 
+    def activate(self):
+        self.activatedOn = datetime.datetime.utcnow()
+        self.save()
+        return self
+
     def check_pass(self, password: str) -> bool:
         return bcrypt.checkpw(password.encode("utf-8"), self.password.encode("utf-8"))
 

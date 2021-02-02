@@ -6,7 +6,7 @@ from helpers.email import get_template, send_email
 
 from auth.models import User
 from auth import functions
-from tokens.models import Token
+from tokens.models import AccountActivationToken
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -56,7 +56,20 @@ def register():
 
     functions.register_user(new_user)
 
-    return response.success({})
+    return response.success()
+
+
+@auth.route("/activate/<token>", methods=["POST"])
+def activate_user(token):
+    try:
+        account_activation_token = AccountActivationToken.objects.get(token=token)
+    except AccountActivationToken.DoesNotExist:
+        return response.errors({"invalid_token": True})
+
+    user = account_activation_token.user
+    user.activate()
+    account_activation_token.use()
+    return response.success()
 
 
 @auth.route("/password_reset", methods=["POST"])
