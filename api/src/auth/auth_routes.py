@@ -113,16 +113,16 @@ def check_password_reset():
 @auth.route("/password_reset", methods=["PATCH"])
 def reset_password():
     fields_missing = require_values(
-        request.json, ["email", "key", "password", "confirm_password"]
+        request.json, ["email", "token", "password", "confirm_password"]
     )
     if len(fields_missing):
         return response.errors({"fields_missing": fields_missing})
 
-    password_reset = PasswordReset.valid_key(
-        key=request.json.get("key"), email=request.json.get("email"), get_obj=True
+    password_reset = PasswordResetToken.validate_token(
+        token=request.json.get("token"), email=request.json.get("email"), get_obj=True
     )
     if not password_reset:
-        return response.errors({"invalid_key": True})
+        return response.errors({"invalid_token": True})
 
     errors = {}
     password, confirm_password = (
@@ -142,6 +142,5 @@ def reset_password():
     user.set_password(password)
     user.save()
     password_reset.use()
-    password_reset.save()
 
     return response.success({})
