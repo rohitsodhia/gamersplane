@@ -64,7 +64,7 @@ class User(models.Model):
     MIN_PASSWORD_LENGTH = 8
 
     @staticmethod
-    def validate_pass(password: str) -> list:
+    def validate_password(password: str) -> list:
         invalid = []
         if len(password) < User.MIN_PASSWORD_LENGTH:
             invalid.append("pass_too_short")
@@ -76,7 +76,7 @@ class User(models.Model):
         return hashed.decode("utf-8")
 
     def set_password(self, password: str) -> bool:
-        pass_valid = User.validate_pass(password)
+        pass_valid = User.validate_password(password)
         if pass_valid == []:
             self.password = self.hash_pass(password)
             return True

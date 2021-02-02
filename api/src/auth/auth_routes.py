@@ -41,7 +41,7 @@ def register():
     username = request.json["username"]
     password = request.json["password"]
     if password:
-        pass_invalid = User.validate_pass(password)
+        pass_invalid = User.validate_password(password)
         if len(pass_invalid):
             errors["pass_errors"] = pass_invalid
 
@@ -131,7 +131,7 @@ def reset_password():
     )
     if password != confirm_password:
         errors["password_mismatch"] = True
-    pass_invalid = User.validate_pass(password)
+    pass_invalid = User.validate_password(password)
     if len(pass_invalid):
         errors["pass_errors"] = pass_invalid
 

@@ -8,11 +8,11 @@ from auth.models import User
 class TestUser:
     VALID_PASS = "abcdefgh"
 
-    def test_validate_pass(self):
-        assert User.validate_pass(self.VALID_PASS) == []
+    def test_validate_password(self):
+        assert User.validate_password(self.VALID_PASS) == []
 
     def test_validate_short_pass(self):
-        assert User.validate_pass("abcd") == ["pass_too_short"]
+        assert User.validate_password("abcd") == ["pass_too_short"]
 
     def test_hash_pass(self):
         assert type(User.hash_pass(self.VALID_PASS)) == str
