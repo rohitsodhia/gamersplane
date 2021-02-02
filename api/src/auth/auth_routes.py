@@ -6,7 +6,7 @@ from helpers.email import get_template, send_email
 
 from auth.models import User
 from auth import functions
-from tokens.models import AccountActivationToken
+from tokens.models import AccountActivationToken, PasswordResetToken
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -79,17 +79,15 @@ def generate_password_reset():
         return response.errors({"fields_missing": fields_missing})
 
     email = request.json["email"]
-    user = User.objects.get(email=email)
-    if not user:
+    try:
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
         return response.errors({"no_account": True})
 
     try:
-        password_reset = Token.objects.get(
-            user=user, token_type=Token.TokenTypes.PASSWORD_RESET, used__isnull=True
-        )
-    except Token.DoesNotExist:
-        password_reset = Token(user=user)
-        password_reset.generate_token()
+        password_reset = PasswordResetToken.objects.get(user=user)
+    except PasswordResetToken.DoesNotExist:
+        password_reset = PasswordResetToken(user=user)
         password_reset.save()
     email_content = get_template(
         "auth/templates/reset_password.html",
@@ -97,7 +95,7 @@ def generate_password_reset():
     )
     send_email(email, "Password reset for Gamers' Plane", email_content)
 
-    return response.success({})
+    return response.success()
 
 
 @auth.route("/password_reset", methods=["GET"])
