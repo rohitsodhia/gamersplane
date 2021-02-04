@@ -6,5 +6,5 @@ class RoleMembership(TimestampedModel, SoftDeleteModel):
     class Meta:
         db_table = "roleMembership"
 
-    user = models.ForeignKey("auth.User", on_delete=models.PROTECT)
-    role = models.ForeignKey("auth.Role", on_delete=models.PROTECT)
+    user = models.ForeignKey("users.User", on_delete=models.PROTECT)
+    role = models.ForeignKey("roles.Role", on_delete=models.PROTECT)

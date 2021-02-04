@@ -2,7 +2,7 @@ from datetime import datetime
 
 from fixtures import app, faker
 
-from auth.models import User
+from users.models import User
 
 
 class TestUser:

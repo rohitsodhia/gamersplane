@@ -1,1 +1,9 @@
-apps = ["auth", "referral_links", "systems", "tokens", "tools"]
+apps = [
+    "authorization",
+    "referral_links",
+    "systems",
+    "tokens",
+    "tools",
+    "roles",
+    "users",
+]

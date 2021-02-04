@@ -4,7 +4,7 @@ from django.db import connection
 
 from envs import SERVER_NAME
 from helpers.email import get_template, send_email
-from auth.models import User
+from users.models import User
 from tokens.models import AccountActivationToken
 
 

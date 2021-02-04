@@ -55,7 +55,7 @@ class User(models.Model):
     banned = models.DateTimeField(null=True)
 
     roles = models.ManyToManyField(
-        "auth.Role", related_name="users", through="auth.RoleMembership"
+        "roles.Role", related_name="users", through="users.RoleMembership"
     )
 
     objects = UserManager()

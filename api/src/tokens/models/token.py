@@ -6,7 +6,7 @@ from uuid import uuid1 as uuid
 
 from django.db import models
 
-from auth.models import User
+from users.models import User
 
 
 class TokenQuerySet(models.QuerySet):

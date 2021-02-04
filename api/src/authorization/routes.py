@@ -4,14 +4,14 @@ from helpers.response import response
 from helpers.endpoint import require_values
 from helpers.email import get_template, send_email
 
-from auth.models import User
-from auth import functions
+from authorization import functions
+from users.models import User
 from tokens.models import AccountActivationToken, PasswordResetToken
 
-auth = Blueprint("auth", __name__, url_prefix="/auth")
+authorization = Blueprint("authorization", __name__, url_prefix="/auth")
 
 
-@auth.route("/login", methods=["POST"])
+@authorization.route("/login", methods=["POST"])
 def login():
     fields_missing = require_values(request.json, ["email", "password"])
     if len(fields_missing):
@@ -29,7 +29,7 @@ def login():
     return response.errors({"invalid_user": True})
 
 
-@auth.route("/register", methods=["POST"])
+@authorization.route("/register", methods=["POST"])
 def register():
     errors = {}
 
@@ -59,7 +59,7 @@ def register():
     return response.success()
 
 
-@auth.route("/activate/<token>", methods=["POST"])
+@authorization.route("/activate/<token>", methods=["POST"])
 def activate_user(token):
     try:
         account_activation_token = AccountActivationToken.objects.get(token=token)
@@ -72,7 +72,7 @@ def activate_user(token):
     return response.success()
 
 
-@auth.route("/password_reset", methods=["POST"])
+@authorization.route("/password_reset", methods=["POST"])
 def generate_password_reset():
     fields_missing = require_values(request.json, ["email"])
     if len(fields_missing):
@@ -98,7 +98,7 @@ def generate_password_reset():
     return response.success()
 
 
-@auth.route("/password_reset", methods=["GET"])
+@authorization.route("/password_reset", methods=["GET"])
 def check_password_reset():
     fields_missing = require_values(request.args, ["email", "token"])
     if len(fields_missing):
@@ -110,7 +110,7 @@ def check_password_reset():
     return response.success({"valid_token": valid_token})
 
 
-@auth.route("/password_reset", methods=["PATCH"])
+@authorization.route("/password_reset", methods=["PATCH"])
 def reset_password():
     fields_missing = require_values(
         request.json, ["email", "token", "password", "confirm_password"]

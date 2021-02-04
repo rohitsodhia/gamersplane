@@ -6,7 +6,7 @@ from helpers.decorators import logged_in
 from helpers.response import response
 from helpers.endpoint import require_values
 
-from auth.models import Role
+from roles.models import Role
 
 roles = Blueprint("roles", __name__, url_prefix="/roles")
 

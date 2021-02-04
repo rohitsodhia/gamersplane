@@ -5,7 +5,7 @@ from flask import g, request
 
 from helpers.response import response
 
-from auth.models import User
+from users.models import User
 
 
 def initialize():

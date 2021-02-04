@@ -12,4 +12,6 @@ class Role(TimestampedModel, SoftDeleteModel):
 
     name = models.CharField(max_length=64)
     role_type = models.CharField(max_length=1, choices=RoleTypes.choices, null=True)
-    owner = models.ForeignKey("auth.User", db_column="userId", on_delete=models.PROTECT)
+    owner = models.ForeignKey(
+        "users.User", db_column="userId", on_delete=models.PROTECT
+    )
