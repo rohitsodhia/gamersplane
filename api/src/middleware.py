@@ -22,7 +22,9 @@ def validate_jwt():
         token = token[7:]
         try:
             jwt_body = jwt.decode(
-                token, os.getenv("JWT_SECRET_KEY"), algorithm=os.getenv("JWT_ALGORITHM")
+                token,
+                os.getenv("JWT_SECRET_KEY"),
+                algorithms=os.getenv("JWT_ALGORITHM"),
             )
         except jwt.ExpiredSignatureError:
             return
