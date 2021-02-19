@@ -1,5 +1,4 @@
 from django.db import models
-from django_mysql.models import JSONField
 from helpers.base_models import TimestampedModel, SoftDeleteModel, SoftDeleteManager
 
 
@@ -18,9 +17,9 @@ class System(SoftDeleteModel, TimestampedModel):
     id = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=40)
     sortName = models.CharField(max_length=40)
-    publisher = JSONField(null=True)
-    generes = JSONField(null=True)
-    basics = JSONField(null=True)
+    publisher = models.JSONField(null=True)
+    generes = models.JSONField(null=True)
+    basics = models.JSONField(null=True)
     hasCharSheet = models.BooleanField(default=True)
     enabled = models.BooleanField(default=True)
 
