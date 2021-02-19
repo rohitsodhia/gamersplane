@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ("createdAt", models.DateTimeField(auto_now_add=True)),
                 ("updatedAt", models.DateTimeField(auto_now=True)),
             ],
-            options={"db_table": "roleMembership"},
+            options={"db_table": "role_membership"},
         ),
         migrations.AddField(
             model_name="user",
