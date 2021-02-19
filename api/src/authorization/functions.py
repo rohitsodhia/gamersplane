@@ -45,6 +45,7 @@ def get_activation_link(user: User) -> str:
 
 def send_activation_email(user: User) -> None:
     email_content = get_template(
-        "auth/templates/activation.html", activation_link=get_activation_link(user)
+        "authorization/templates/activation.html",
+        activation_link=get_activation_link(user),
     )
     send_email(user.email, "Activate your Gamers' Plane account!", email_content)

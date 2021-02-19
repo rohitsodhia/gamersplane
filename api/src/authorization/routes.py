@@ -90,7 +90,7 @@ def generate_password_reset():
         password_reset = PasswordResetToken(user=user)
         password_reset.save()
     email_content = get_template(
-        "auth/templates/reset_password.html",
+        "authorization/templates/reset_password.html",
         reset_link="http://gamersplane.com/auth/resetPass/" + password_reset.token,
     )
     send_email(email, "Password reset for Gamers' Plane", email_content)
