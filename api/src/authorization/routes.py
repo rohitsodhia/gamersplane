@@ -4,8 +4,9 @@ from helpers.response import response
 from helpers.endpoint import require_values
 from helpers.email import get_template, send_email
 
-from authorization import functions
 from users.models import User
+from users import functions as users_functions
+from users.exceptions import UserExists
 from tokens.models import AccountActivationToken, PasswordResetToken
 
 authorization = Blueprint("authorization", __name__, url_prefix="/auth")
@@ -48,13 +49,10 @@ def register():
     if len(errors):
         return response.errors(errors)
 
-    new_user = User(email=email, username=username)
-    new_user.set_password(password)
-    errors = functions.check_for_existing_user(new_user)
-    if errors:
-        return response.errors({"errors": errors})
-
-    functions.register_user(new_user)
+    try:
+        users_functions.register_user(email=email, username=username, password=password)
+    except UserExists as e:
+        response.errors(e.errors)
 
     return response.success()
 
