@@ -1,16 +1,22 @@
 #!/usr/local/bin/python
 
-import os
+import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
 
+code_path = Path("../")
+sys.path.append(code_path / "/src")
+load_dotenv(dotenv_path=code_path / ".env")
 
-env_path = Path("../app") / ".env"
-load_dotenv(dotenv_path=env_path)
 
-import django_conf
+import django
 
-from auth.models import User
+django.setup()
 
-User.register(email="contact@gamersplane.com", username="Keleth", password="test1234")
+from users import functions
+
+user = functions.register_user(
+    email="contact@gamersplane.com", username="Keleth", password="test1234"
+)
+user.activate()
