@@ -1,4 +1,5 @@
 from django.db import models
+
 from helpers.base_models import TimestampedModel, SoftDeleteModel, SoftDeleteManager
 
 
@@ -17,8 +18,15 @@ class System(SoftDeleteModel, TimestampedModel):
     id = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=40)
     sortName = models.CharField(max_length=40)
-    publisher = models.JSONField(null=True)
-    generes = models.JSONField(null=True)
+    publisher = models.ForeignKey(
+        "systems.Publisher",
+        db_column="publisherId",
+        on_delete=models.PROTECT,
+        null=True,
+    )
+    genres = models.ManyToManyField(
+        "systems.Genre", related_name="genres", through="systems.SystemGenre"
+    )
     basics = models.JSONField(null=True)
     hasCharSheet = models.BooleanField(default=True)
     enabled = models.BooleanField(default=True)
