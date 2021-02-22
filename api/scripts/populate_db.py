@@ -14,9 +14,38 @@ import django
 
 django.setup()
 
-from users import functions
+import json
 
-user = functions.register_user(
+from users.functions import register_user
+from systems.models import System, Genre, Publisher
+
+print("\n\n")
+
+user = register_user(
     email="contact@gamersplane.com", username="Keleth", password="test1234"
 )
 user.activate()
+print("Create first user\n")
+
+with open("data/systems.json") as f:
+    systems_data = json.load(f)
+
+for system_data in systems_data:
+    if not system_data.get("basics", False):
+        system_data["basics"] = None
+    system = System(
+        **{k: v for k, v in system_data.items() if k not in ["genres", "publisher"]}
+    )
+    system.save()
+    if system_data["publisher"]:
+        publisher, _ = Publisher.objects.get_or_create(
+            name=system_data["publisher"]["name"],
+            defaults={"website": system_data["publisher"]["site"]},
+        )
+        system.publisher = publisher
+    if system_data["genres"]:
+        for genre_data in system_data["genres"]:
+            genre, _ = Genre.objects.get_or_create(genre=genre_data)
+            system.genres.add(genre)
+    print(f"Created system: {system.name}")
+print("\n")

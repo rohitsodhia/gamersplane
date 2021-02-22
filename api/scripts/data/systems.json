@@ -1,0 +1,331 @@
+[
+	{
+		"id": "13thage",
+		"name": "13th Age",
+		"sortName": "13th age",
+		"enabled": true,
+		"genres": [ "Fantasy" ],
+		"publisher": { "name": "Pelgrane Press Ltd", "site": "http://www.pelgranepress.com" },
+		"basics": [
+			{
+				"text": "Core Book (Amazon)",
+				"site": "http://www.amazon.com/gp/product/190898340X/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=190898340X&linkCode=as2&tag=gampla0e6-20&linkId=B7FFODCXGZT3L52A"
+			},
+			{
+				"text": "Core Book (DTRPG, PDF)",
+				"site": "http://www.drivethrurpg.com/product/118994/13th-Age-Core-Book?affiliateid=739399"
+			}
+		],
+		"hasCharSheet": true
+	},
+	{
+		"id": "7thsea_2e",
+		"name": "7th Sea (2e)",
+		"sortName": "7th sea (2e)",
+		"enabled": true,
+		"genres": [ "Fantasy" ],
+		"publisher": { "name": "John Wick Presents", "site": "http://johnwickpresents.com/" },
+		"hasCharSheet": true,
+		"basics": [
+			{
+				"text": "Core Rulebook",
+				"site": "https://www.drivethrurpg.com/product/185462/7th-Sea-Core-Rulebook-Second-Edition?affiliateid=739399"
+			}
+		]
+	},
+	{
+		"id": "afmbe",
+		"name": "All Flesh Must Be Eaten",
+		"sortName": "all flesh must be eaten",
+		"enabled": true,
+		"genres": [ "Horror" ],
+		"publisher": { "name": "Eden Studios Inc.", "site": "http://edenstudios.net/" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "cthulhu_brs7e",
+		"name": "Call of Cthulhu (Chaosium, 7e)",
+		"sortName": "call of cthulhu (chaosium, 7e)",
+		"hasCharSheet": true,
+		"genres": [ "Horror" ],
+		"publisher": { "name": "Chaosium Inc", "site": "http://chaosium.com/" },
+		"basics": [
+			{
+				"text": "Call of Cthulhu 7e - Keeper's Handbook",
+				"site": "http://www.drivethrurpg.com/product/150997/Call-of-Cthulhu-7th-Edition--Keepers-Rulebook?affiliateid=739399"
+			}
+		]
+	},
+	{
+		"id": "custom",
+		"name": "Custom",
+		"sortName": "custom",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "You!", "site": null },
+		"hasCharSheet": true
+	},
+	{
+		"id": "d20cthulhu",
+		"name": "d20 Call of Cthulhu",
+		"sortName": "d20 call of cthulhu",
+		"enabled": true,
+		"genres": [ "Horror" ],
+		"publisher": { "name": "Wizards of the Coast", "site": "http://www.wizards.com" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "deadlands",
+		"name": "Deadlands",
+		"sortName": "deadlands",
+		"enabled": true,
+		"genres": [ "Steampunk" ],
+		"publisher": { "name": "Pinnacle Entertainment Group", "site": "https://www.peginc.com/" },
+		"basics": [],
+		"hasCharSheet": true
+	},
+	{
+		"id": "dnd3",
+		"name": "Dungeons & Dragons 3/3.5",
+		"sortName": "dungeons & dragons 3/3.5",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Wizards of the Coast", "site": "http://www.wizards.com" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "dnd4",
+		"name": "Dungeons & Dragons 4th",
+		"sortName": "dungeons & dragons 4th",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Wizards of the Coast", "site": "http://www.wizards.com" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "dnd5",
+		"name": "Dungeons & Dragons 5th",
+		"sortName": "dungeons & dragons 5th",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Wizards of the Coast", "site": "http://www.wizards.com" },
+		"basics": [
+			{
+				"text": "Players Handbook",
+				"site": "http://www.amazon.com/gp/product/0786965606/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0786965606&linkCode=as2&tag=gampla0e6-20&linkId=32O7J52S2MQAP2YL"
+			}
+		],
+		"hasCharSheet": true
+	},
+	{
+		"id": "dresden",
+		"name": "Dresden Files RPG",
+		"sortName": "dresden files rpg",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Evil Hat Productions", "site": "http://www.evilhat.com" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "dungeonworld",
+		"name": "Dungeon World",
+		"sortName": "dungeon world",
+		"enabled": true,
+		"genres": [ "Fantasy" ],
+		"publisher": { "name": "Sage Kobold", "site": "http://www.dungeon-world.com/" },
+		"hasCharSheet": false,
+		"basics": [
+			{
+				"text": "Dungeon World PDF",
+				"site": "http://www.drivethrurpg.com/product/108028/Dungeon-World?affiliateid=739399"
+			}
+		]
+	},
+	{
+		"id": "fae",
+		"name": "Fate Accelerated",
+		"sortName": "fate accelerated",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Evil Hat Productions", "site": "http://www.evilhat.com" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "fate",
+		"name": "Fate Core",
+		"sortName": "fate core",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Evil Hat Productions", "site": "http://www.evilhat.com" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "gurps",
+		"name": "GURPS",
+		"sortName": "gurps",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Steve Jackson Games", "site": "http://www.sjgames.com" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "hellfrost",
+		"name": "Hellfrost",
+		"sortName": "hellfrost",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Triple Ace Games", "site": "http://www.tripleacegames.com" },
+		"basics": [],
+		"hasCharSheet": true
+	},
+	{
+		"id": "identeco",
+		"name": "Identeco",
+		"sortName": "identeco",
+		"enabled": true,
+		"genres": [ "Cyberpunk" ],
+		"publisher": { "name": "Humanoid Games", "site": "http://www.playidenteco.com/" },
+		"hasCharSheet": false
+	},
+	{
+		"id": "marvel",
+		"name": "Marvel",
+		"sortName": "marvel",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Marvel Comics", "site": null },
+		"basics": [],
+		"hasCharSheet": true
+	},
+	{
+		"id": "numenera",
+		"name": "Numenera",
+		"sortName": "numenera",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Monte Cook Games", "site": "http://www.montecookgames.com/" },
+		"basics": [
+			{
+				"text": "Core Book (Amazon)",
+				"site": "http://www.amazon.com/gp/product/1939979005/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=1939979005&linkCode=as2&tag=gampla0e6-20&linkId=23TDF4NGF7UKFSOK"
+			}
+		],
+		"hasCharSheet": true
+	},
+	{
+		"id": "pathfinder",
+		"name": "Pathfinder",
+		"sortName": "pathfinder",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Paizo Inc", "site": "http://www.paizo.com" },
+		"basics": [],
+		"hasCharSheet": true
+	},
+	{
+		"id": "pathfinder2e",
+		"name": "Pathfinder 2e",
+		"sortName": "pathfinder2e",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Paizo Inc", "site": "http://www.paizo.com" },
+		"basics": [],
+		"hasCharSheet": false
+	},
+	{
+		"id": "primeval",
+		"name": "Primeval",
+		"sortName": "primeval",
+		"enabled": true,
+		"genres": [ "Fantasy" ],
+		"publisher": { "name": "Cubicle 7", "site": "http://www.cubicle7.co.uk/our-games/primeval/" },
+		"basics": [],
+		"hasCharSheet": true
+	},
+	{
+		"id": "savageworlds",
+		"name": "Savage Worlds",
+		"sortName": "savage worlds",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Pinnacle Entertainment Group", "site": "https://www.peginc.com/" },
+		"basics": [],
+		"hasCharSheet": true
+	},
+	{
+		"id": "shadowrun4",
+		"name": "Shadowrun (4e)",
+		"sortName": "shadowrun (4th)",
+		"enabled": true,
+		"genres": [ "Cyberpunk" ],
+		"publisher": { "name": "Catalyst Game Labs", "site": "http://www.catalystgamelabs.com/" },
+		"basics": [],
+		"hasCharSheet": true
+	},
+	{
+		"id": "shadowrun5",
+		"name": "Shadowrun (5e)",
+		"sortName": "shadowrun (5e)",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Catalyst Game Labs", "site": "http://www.catalystgamelabs.com" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "spycraft",
+		"name": "Spycraft (1st Edition)",
+		"sortName": "spycraft (1st edition)",
+		"enabled": true,
+		"genres": [ "Spy" ],
+		"publisher": { "name": "Crafty Games", "site": "http://www.crafty-games.com" },
+		"basics": [],
+		"hasCharSheet": true
+	},
+	{
+		"id": "spycraft2",
+		"name": "Spycraft 2.0",
+		"sortName": "spycraft 2.0",
+		"enabled": true,
+		"genres": [ "Spy" ],
+		"publisher": { "name": "Crafty Games", "site": "http://www.crafty-games.com" },
+		"basics": [],
+		"hasCharSheet": true
+	},
+	{
+		"id": "starwarsffg",
+		"name": "Star Wars FFG",
+		"sortName": "star wars ffg",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "Fantasy Flight Games", "site": "https://www.fantasyflightgames.com/" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "thestrange",
+		"name": "The Strange",
+		"sortName": "the strange",
+		"enabled": true,
+		"genres": [ "Fantasy" ],
+		"publisher": { "name": "Monte Cook Games", "site": "http://www.montecookgames.com/" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "tor",
+		"name": "The One Ring",
+		"sortName": "tor",
+		"enabled": true,
+		"genres": [ "fantasy" ],
+		"publisher": { "name": "Cubicle 7", "site": "http://cubicle7.co.uk" },
+		"hasCharSheet": true
+	},
+	{
+		"id": "wod",
+		"name": "World of Darkness",
+		"sortName": "world of darkness",
+		"enabled": true,
+		"genres": [],
+		"publisher": { "name": "White Wolf Publishing", "site": "http://www.white-wolf.com/" },
+		"basics": [],
+		"hasCharSheet": true
+	}
+]
