@@ -7,4 +7,4 @@ class Publisher(SoftDeleteModel, TimestampedModel):
         db_table = "publishers"
 
     name = models.CharField(max_length=40)
-    website = models.CharField(max_length=200)
+    website = models.CharField(max_length=200, null=True)

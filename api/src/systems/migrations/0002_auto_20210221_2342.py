@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("name", models.CharField(max_length=40)),
-                ("website", models.CharField(max_length=200)),
+                ("website", models.CharField(max_length=200, null=True)),
                 ("createdAt", models.DateTimeField(auto_now_add=True)),
                 ("updatedAt", models.DateTimeField(auto_now=True)),
                 ("deletedAt", models.DateTimeField(null=True)),
