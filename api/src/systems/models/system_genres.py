@@ -6,5 +6,9 @@ class SystemGenre(TimestampedModel, SoftDeleteModel):
     class Meta:
         db_table = "system_genres"
 
-    system = models.ForeignKey("systems.System", on_delete=models.PROTECT)
-    genre = models.ForeignKey("systems.Genre", on_delete=models.PROTECT)
+    system = models.ForeignKey(
+        "systems.System", db_column="systemId", on_delete=models.PROTECT
+    )
+    genre = models.ForeignKey(
+        "systems.Genre", db_column="genreId", on_delete=models.PROTECT
+    )
