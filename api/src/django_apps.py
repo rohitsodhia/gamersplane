@@ -6,4 +6,5 @@ apps = [
     "tools",
     "roles",
     "users",
+    "permissions",
 ]
