@@ -3,7 +3,7 @@ from typing import Union
 from django.db import connection
 
 from authorization.functions import send_activation_email
-from users.models import User
+from users.models import User, UserMeta
 from users.exceptions import UserExists
 
 
@@ -30,8 +30,16 @@ def register_user(email: str, username: str, password: str) -> User:
     errors = check_for_existing_user(new_user)
     if errors:
         raise UserExists({"errors": errors})
-
     new_user.save()
+
+    UserMeta.objects.bulk_create(
+        [
+            UserMeta(user=new_user, key=UserMeta.MetaKeys.NEW_GAME_MAIL, value=True),
+            UserMeta(user=new_user, key=UserMeta.MetaKeys.POST_SIDE, value="l"),
+            UserMeta(user=new_user, key=UserMeta.MetaKeys.SHOW_AVATARS, value=True),
+        ]
+    )
+
     send_activation_email(new_user)
 
     return new_user
