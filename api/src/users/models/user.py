@@ -38,6 +38,7 @@ class User(models.Model):
     roles = models.ManyToManyField(
         "roles.Role", related_name="users", through="users.RoleMembership"
     )
+    admin = models.BooleanField(default=False)
 
     objects = UserManager()
     all_objects = UserManager(inactive=True, banned=True)

@@ -32,6 +32,7 @@ class Migration(migrations.Migration):
                 ("lastActivity", models.DateTimeField(null=True)),
                 ("suspendedUntil", models.DateTimeField(null=True)),
                 ("banned", models.DateTimeField(null=True)),
+                ("admin", models.BooleanField(default=True)),
             ],
             options={"db_table": "users"},
         )
