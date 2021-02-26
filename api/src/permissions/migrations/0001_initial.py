@@ -11,6 +11,39 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name="Role",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("deletedAt", models.DateTimeField(null=True)),
+                ("createdAt", models.DateTimeField(auto_now_add=True)),
+                ("updatedAt", models.DateTimeField(auto_now=True)),
+                ("name", models.CharField(max_length=64)),
+                (
+                    "role_type",
+                    models.CharField(
+                        choices=[("s", "Site"), ("f", "Forum")], max_length=1, null=True
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        db_column="userId",
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="users.user",
+                    ),
+                ),
+            ],
+            options={"db_table": "roles"},
+        ),
+        migrations.CreateModel(
             name="SitePermissions",
             fields=[
                 (
@@ -28,5 +61,5 @@ class Migration(migrations.Migration):
                 ("deletedAt", models.DateTimeField(null=True)),
             ],
             options={"db_table": "site_permissions"},
-        )
+        ),
     ]

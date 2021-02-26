@@ -4,7 +4,6 @@ apps = [
     "systems",
     "tokens",
     "tools",
-    "roles",
     "users",
     "permissions",
 ]

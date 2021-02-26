@@ -14,8 +14,8 @@ from authorization.routes import authorization
 from users.routes import users
 from referral_links.routes import referral_links
 from systems.routes import systems
-from roles.routes import roles
-from permissions.routes import permissions
+from permissions.roles_routes import roles
+from permissions.permissions_routes import permissions
 
 seed()
 
