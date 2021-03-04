@@ -8,11 +8,11 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [("users", "0001_initial"), ("roles", "0001_initial")]
+    dependencies = [("users", "0001_initial"), ("permissions", "0001_initial")]
 
     operations = [
         migrations.CreateModel(
-            name="RoleMembership",
+            name="UserRoles",
             fields=[
                 (
                     "id",
@@ -26,27 +26,31 @@ class Migration(migrations.Migration):
                 (
                     "role",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.PROTECT, to="roles.role"
+                        db_column="roleId",
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="permissions.Role",
                     ),
                 ),
-                ("deletedAt", models.DateTimeField(null=True)),
                 ("createdAt", models.DateTimeField(auto_now_add=True)),
                 ("updatedAt", models.DateTimeField(auto_now=True)),
+                ("deletedAt", models.DateTimeField(null=True)),
             ],
-            options={"db_table": "role_membership"},
+            options={"db_table": "user_roles"},
         ),
         migrations.AddField(
             model_name="user",
             name="roles",
             field=models.ManyToManyField(
-                related_name="users", through="users.RoleMembership", to="roles.Role"
+                related_name="users", through="users.UserRoles", to="permissions.Role"
             ),
         ),
         migrations.AddField(
-            model_name="rolemembership",
+            model_name="userroles",
             name="user",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.PROTECT, to="users.user"
+                db_column="userId",
+                on_delete=django.db.models.deletion.PROTECT,
+                to="users.user",
             ),
         ),
     ]

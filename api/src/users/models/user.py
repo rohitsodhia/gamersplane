@@ -2,9 +2,10 @@ import bcrypt
 import datetime
 import jwt
 
-from django.db import models
+from django.db import models, connection
 
 from envs import JWT_ALGORITHM, JWT_SECRET_KEY
+from permissions.models import Permission
 
 
 class UserManager(models.Manager):
@@ -26,17 +27,17 @@ class User(models.Model):
     class Meta:
         db_table = "users"
 
-    username = models.CharField(max_length=24)
+    username = models.CharField(max_length=24, unique=True)
     password = models.CharField(max_length=64)
     salt = models.CharField(max_length=20)
-    email = models.CharField(max_length=50)
+    email = models.CharField(max_length=50, unique=True)
     joinDate = models.DateTimeField(auto_now=True)
     activatedOn = models.DateTimeField(null=True)
     lastActivity = models.DateTimeField(null=True)
     suspendedUntil = models.DateTimeField(null=True)
     banned = models.DateTimeField(null=True)
     roles = models.ManyToManyField(
-        "roles.Role", related_name="users", through="users.RoleMembership"
+        "permissions.Role", related_name="users", through="users.UserRoles"
     )
     admin = models.BooleanField(default=False)
 
@@ -44,6 +45,16 @@ class User(models.Model):
     all_objects = UserManager(inactive=True, banned=True)
 
     MIN_PASSWORD_LENGTH = 8
+
+    @property
+    def permissions(self):
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT DISTINCT permission FROM permissions p INNER JOIN role_permissions rp ON rp.permissionId = p.id INNER JOIN roles r ON r.id = rp.roleId INNER JOIN user_roles ur ON ur.roleId = r.id WHERE ur.userId = %s",
+                [self.id],
+            )
+            permissions = cursor.fetchall()
+        return list([v[0] for v in permissions])
 
     @staticmethod
     def validate_password(password: str) -> list:

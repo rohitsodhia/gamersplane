@@ -6,12 +6,12 @@ class Role(TimestampedModel, SoftDeleteModel):
     class Meta:
         db_table = "roles"
 
-    class RoleTypes(models.TextChoices):
-        SITE = "s", "Site"
-        FORUM = "f", "Forum"
-
-    name = models.CharField(max_length=64)
-    role_type = models.CharField(max_length=1, choices=RoleTypes.choices, null=True)
+    name = models.CharField(max_length=64, unique=True)
     owner = models.ForeignKey(
         "users.User", db_column="userId", on_delete=models.PROTECT
+    )
+    permissions = models.ManyToManyField(
+        "permissions.Permission",
+        related_name="roles",
+        through="permissions.RolePermission",
     )
