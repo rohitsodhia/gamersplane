@@ -56,5 +56,10 @@ class Response:
             errors = {"unauthorized": True}
         return self.errors(errors=errors, response_code=401)
 
+    def forbidden(self, errors: object = None) -> BuildReturnType:
+        if not errors:
+            errors = {"forbidden": True}
+        return self.errors(errors=errors, response_code=403)
+
 
 response = Response()

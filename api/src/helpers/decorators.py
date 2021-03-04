@@ -12,10 +12,15 @@ def logged_in(func=None, *, permissions=None):
 
     @wraps(func)
     def wrapper(*args, **kwargs) -> Callable:
-        if not g.User:
+        if not g.user:
             response.unauthorized()
         if permissions:
-            pass
+            if type(permissions) == str:
+                permissions = [permissions]
+            if not g.user.admin and not bool(
+                set(g.user.permissions) & set(permissions)
+            ):
+                response.forbidden()
         return func(*args, **kwargs)
 
     return wrapper
