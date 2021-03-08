@@ -17,6 +17,7 @@ django.setup()
 import json
 
 from users.functions import register_user
+from permissions.models import Role, Permission
 from systems.models import System, Genre, Publisher
 
 print("\n\n")
@@ -26,6 +27,17 @@ user = register_user(
 )
 user.activate()
 print("Create first user\n")
+
+guest_role = Role(name="Guest", owner=user)
+guest_role.save()
+member_role = Role(name="Member", owner=user)
+member_role.save()
+print("Add Guest and Member roles\n")
+
+user.roles.add(member_role)
+user.save()
+print("Add first user to Member role\n")
+
 
 with open("data/systems.json") as f:
     systems_data = json.load(f)
