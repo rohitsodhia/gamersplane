@@ -5,7 +5,6 @@ import jwt
 from django.db import models, connection
 
 from envs import JWT_ALGORITHM, JWT_SECRET_KEY
-from permissions.models import Permission
 
 
 class UserManager(models.Manager):
