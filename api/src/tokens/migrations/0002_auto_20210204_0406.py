@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
             model_name="token",
             name="token",
             field=models.CharField(
-                default=tokens.models.token.Token.generate_token, max_length=36
+                default=tokens.models.token.generate_token, max_length=36
             ),
         ),
         migrations.AlterField(

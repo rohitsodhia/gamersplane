@@ -28,6 +28,10 @@ class TokenManager(models.Manager):
         return queryset
 
 
+def generate_token():
+    return str(uuid())
+
+
 class Token(models.Model):
     class Meta:
         db_table = "tokens"
@@ -38,9 +42,6 @@ class Token(models.Model):
     class TokenTypes(models.TextChoices):
         ACCOUNT_ACTIVATION = "aa", "Account Activation"
         PASSWORD_RESET = "pr", "Password Reset"
-
-    def generate_token():
-        return str(uuid())
 
     user = models.ForeignKey("users.User", db_column="userId", on_delete=models.PROTECT)
     token_type = models.CharField(max_length=2, choices=TokenTypes.choices)
