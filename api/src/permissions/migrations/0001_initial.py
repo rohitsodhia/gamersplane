@@ -24,6 +24,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("name", models.CharField(max_length=64, unique=True)),
+                ("plural", models.CharField(max_length=64, unique=True)),
                 (
                     "owner",
                     models.ForeignKey(
