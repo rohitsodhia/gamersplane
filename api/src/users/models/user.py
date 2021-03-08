@@ -94,3 +94,17 @@ class User(models.Model):
             JWT_SECRET_KEY,
             algorithm=JWT_ALGORITHM,
         ).decode("utf-8")
+
+    def to_dict(self):
+        dict_val = {
+            "username": self.username,
+            "email": self.email,
+            "joinDate": self.joinDate,
+            "lastActivity": self.lastActivity,
+            "suspendedUntil": self.suspendedUntil,
+            "banned": self.banned,
+            "roles": [v.name for v in self.roles.all()],
+            "permissions": self.permissions,
+            "admin": self.admin,
+        }
+        return dict_val
