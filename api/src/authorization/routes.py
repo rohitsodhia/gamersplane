@@ -26,7 +26,9 @@ def login():
     if user:
         password = request.json["password"]
         if user.check_pass(password):
-            return response.success({"logged_in": True, "jwt": user.generate_jwt()})
+            return response.success(
+                {"logged_in": True, "jwt": user.generate_jwt(), "user": user.to_dict()}
+            )
     return response.errors({"invalid_user": True})
 
 
