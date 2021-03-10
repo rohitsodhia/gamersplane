@@ -28,7 +28,6 @@ class User(models.Model):
 
     username = models.CharField(max_length=24, unique=True)
     password = models.CharField(max_length=64)
-    salt = models.CharField(max_length=20)
     email = models.CharField(max_length=50, unique=True)
     joinDate = models.DateTimeField(auto_now=True)
     activatedOn = models.DateTimeField(null=True)
