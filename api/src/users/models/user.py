@@ -91,7 +91,7 @@ class User(models.Model):
             },
             JWT_SECRET_KEY,
             algorithm=JWT_ALGORITHM,
-        ).decode("utf-8")
+        )
 
     def to_dict(self):
         dict_val = {
