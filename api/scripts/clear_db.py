@@ -18,3 +18,5 @@ db = mysql.connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE)
 
 db.query("DROP DATABASE gamersplane;")
 db.query("CREATE DATABASE gamersplane;")
+
+print("Dropped and recreated database\n")
