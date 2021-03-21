@@ -67,9 +67,6 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("deletedAt", models.DateTimeField(null=True)),
-                ("createdAt", models.DateTimeField(auto_now_add=True)),
-                ("updatedAt", models.DateTimeField(auto_now=True)),
                 (
                     "permission",
                     models.ForeignKey(
@@ -86,6 +83,9 @@ class Migration(migrations.Migration):
                         to="permissions.role",
                     ),
                 ),
+                ("createdAt", models.DateTimeField(auto_now_add=True)),
+                ("updatedAt", models.DateTimeField(auto_now=True)),
+                ("deletedAt", models.DateTimeField(null=True)),
             ],
             options={"db_table": "role_permissions"},
         ),
