@@ -27,4 +27,8 @@ if [[ -n $py_files ]]; then
 	done
 fi
 
+if [[ $exit_code == 1 ]]; then
+	printf "\nAdd the changes to commit\n"
+fi
+
 exit $exit_code
