@@ -1,0 +1,9 @@
+#!/bin/bash
+
+env="dev"
+if [[ $# == 1 ]]; then
+	service=$1
+fi
+
+path="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+docker-compose -f "$path/docker-compose.yml" -f "$path/docker-compose.$env.yml" restart $service
