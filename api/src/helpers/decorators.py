@@ -7,20 +7,21 @@ from helpers.response import response
 
 
 def logged_in(func=None, *, permissions=None):
-    if not func:
-        return partial(logged_in, permissions=None)
+    if func is None:
+        return partial(logged_in, permissions=permissions)
 
     @wraps(func)
     def wrapper(*args, **kwargs) -> Callable:
-        if not g.user:
-            response.unauthorized()
+        nonlocal permissions
+        if not g.get("user"):
+            return response.unauthorized()
         if permissions:
             if type(permissions) == str:
                 permissions = [permissions]
             if not g.user.admin and not bool(
                 set(g.user.permissions) & set(permissions)
             ):
-                response.forbidden()
+                return response.forbidden()
         return func(*args, **kwargs)
 
     return wrapper
