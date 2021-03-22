@@ -1,6 +1,7 @@
 import bcrypt
 import datetime
 import jwt
+from typing import List
 
 from django.db import models, connection
 
@@ -45,7 +46,7 @@ class User(models.Model):
     MIN_PASSWORD_LENGTH = 8
 
     @property
-    def permissions(self):
+    def permissions(self) -> List[int]:
         with connection.cursor() as cursor:
             cursor.execute(
                 "SELECT DISTINCT permission FROM permissions p INNER JOIN role_permissions rp ON rp.permissionId = p.id INNER JOIN roles r ON r.id = rp.roleId INNER JOIN user_roles ur ON ur.roleId = r.id WHERE ur.userId = %s",
