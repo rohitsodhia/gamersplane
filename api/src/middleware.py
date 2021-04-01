@@ -3,6 +3,7 @@ import jwt
 
 from flask import g, request
 
+import envs
 from helpers.response import response
 
 from users.models import User
@@ -23,8 +24,8 @@ def validate_jwt():
         try:
             jwt_body = jwt.decode(
                 token,
-                os.getenv("JWT_SECRET_KEY"),
-                algorithms=os.getenv("JWT_ALGORITHM"),
+                envs.JWT_SECRET_KEY,
+                algorithms=envs.JWT_ALGORITHM,
             )
         except jwt.ExpiredSignatureError:
             return

@@ -12,4 +12,9 @@ MYSQL_USER = os.getenv("MYSQL_USER")
 MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
 MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
 
+REDIS_HOST = os.getenv("REDIS_HOST")
+REDIS_TTL = os.getenv("REDIS_TTL")
+
+DJANGO_SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -1,24 +1,24 @@
-import os
 import smtplib
 import ssl
 
 from jinja2 import FileSystemLoader, Environment
 
+import envs
+
 from email.message import EmailMessage
 from email.headerregistry import Address
 
-from envs import ROOT_DIR, ENVIRONMENT
 
-uri = os.getenv("EMAIL_URI")
-port = os.getenv("EMAIL_PORT")
-login = os.getenv("EMAIL_LOGIN")
-password = os.getenv("EMAIL_PASSWORD")
+uri = envs.EMAIL_URI
+port = envs.EMAIL_PORT
+login = envs.EMAIL_LOGIN
+password = envs.EMAIL_PASSWORD
 
 context = ssl.create_default_context()
 
 
 def get_template(template: str, **kwargs) -> str:
-    file_loader = FileSystemLoader(searchpath=ROOT_DIR)
+    file_loader = FileSystemLoader(searchpath=envs.ROOT_DIR)
     env = Environment(loader=file_loader)
 
     template = env.get_template(template)
@@ -28,7 +28,7 @@ def get_template(template: str, **kwargs) -> str:
 
 
 def send_email(to: str, subject: str, content: str) -> None:
-    if ENVIRONMENT == "dev":
+    if envs.ENVIRONMENT == "dev":
         return
 
     email = EmailMessage()
