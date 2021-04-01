@@ -43,3 +43,7 @@ services:
     volumes:
       # - ./docker/mysql:/docker-entrypoint-initdb.d
       - mysql_db:/var/lib/mysql
+
+  cache:
+    container_name: gamersplane-cache
+    image: redis:6.2-alpine

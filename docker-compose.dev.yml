@@ -5,11 +5,6 @@ services:
     command: gunicorn app:create_app() --bind 0.0.0.0:8000 --reload --timeout 600
     volumes:
       - ./docker/python:/usr/src/scripts
-    ports:
-      - 4444:4444
-    environment:
-      - REMOTE_PDB_HOST=0.0.0.0
-      - REMOTE_PDB_PORT=4444
     stdin_open: true
     tty: true
 

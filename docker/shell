@@ -1,7 +1,7 @@
 #!/bin/bash
 
 container=$1
-valid_containers=("mysql" "api" "proxy")
+valid_containers=("mysql" "api" "proxy" "cache")
 valid=0
 for valid_container in ${valid_containers[@]}; do
 	if [[ $container == $valid_container ]]; then
@@ -10,12 +10,12 @@ for valid_container in ${valid_containers[@]}; do
 	fi
 done
 if [[ $valid == 0 ]]; then
-	echo "No valid container: mysql api proxy"
+	echo "No valid container: mysql api proxy cache"
 	exit 1
 fi
 
 shell="bash"
-if [[ $container == "api" ]]; then
+if [[ $container == "api" || $container == "cache" ]]; then
 	shell="ash"
 fi
 
