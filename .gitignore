@@ -16,3 +16,4 @@
 .env
 */Gamers_Plane.egg-info
 */.devcontainer
+docker-compose.override.yml
