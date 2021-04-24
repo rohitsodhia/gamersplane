@@ -1,0 +1,152 @@
+[
+	{
+		"id": 1,
+		"title": "Index",
+		"description": null,
+		"forumType": null,
+		"parent": null,
+		"heritage": "",
+		"order": 0,
+		"threadCount": 0
+	},
+	{
+		"id": 2,
+		"title": "General",
+		"description": null,
+		"forumType": "c",
+		"parent": 1,
+		"heritage": "0002",
+		"order": 1,
+		"threadCount": 0
+	},
+	{
+		"id": 3,
+		"title": "Game Forums",
+		"description": null,
+		"forumType": "c",
+		"parent": 1,
+		"heritage": "0003",
+		"order": 5,
+		"threadCount": 0
+	},
+	{
+		"id": 4,
+		"title": "Announcements",
+		"description": "Read and discuss all site announcements.",
+		"forumType": "f",
+		"parent": 2,
+		"heritage": "0002-0004",
+		"order": 1,
+		"threadCount": 93
+	},
+	{
+		"id": 5,
+		"title": "General Chat",
+		"description": "Anything not fitting into another forum goes here.",
+		"forumType": "f",
+		"parent": 2,
+		"heritage": "0002-0005",
+		"order": 2,
+		"threadCount": 235
+	},
+	{
+		"id": 6,
+		"title": "Site Discussions",
+		"description": null,
+		"forumType": "f",
+		"parent": 2,
+		"heritage": "0002-0006",
+		"order": 3,
+		"threadCount": 426
+	},
+	{
+		"id": 7,
+		"title": "Game Discussions",
+		"description": null,
+		"forumType": "c",
+		"parent": 1,
+		"heritage": "0007",
+		"order": 2,
+		"threadCount": 0
+	},
+	{
+		"id": 8,
+		"title": "Pen and Paper Games",
+		"description": null,
+		"forumType": "f",
+		"parent": 7,
+		"heritage": "0007-0008",
+		"order": 1,
+		"threadCount": 324
+	},
+	{
+		"id": 9,
+		"title": "Video Games",
+		"description": null,
+		"forumType": "f",
+		"parent": 7,
+		"heritage": "0007-0009",
+		"order": 2,
+		"threadCount": 72
+	},
+	{
+		"id": 10,
+		"title": "Board/Card Games",
+		"description": null,
+		"forumType": "f",
+		"parent": 7,
+		"heritage": "0007-0010",
+		"order": 3,
+		"threadCount": 23
+	},
+	{
+		"id": 11,
+		"title": "Games Tavern",
+		"description": "Discuss games you're interested in running, post about a game you'd like to see, or recruit people for your game here.",
+		"forumType": "f",
+		"parent": 3,
+		"heritage": "0003-0011",
+		"order": 1,
+		"threadCount": 1581
+	},
+	{
+		"id": 12,
+		"title": "Bugs",
+		"description": null,
+		"forumType": "f",
+		"parent": 6,
+		"heritage": "0002-0006-0012",
+		"order": 1,
+		"threadCount": 363
+	},
+	{
+		"id": 13,
+		"title": "Media",
+		"description": "Got thoughts on books, movies, comics, etc? Share it!",
+		"forumType": "f",
+		"parent": 5,
+		"heritage": "0002-0005-0013",
+		"order": 2,
+		"threadCount": 3
+	},
+	{
+		"id": 14,
+		"title": "Magic the Gathering",
+		"description": null,
+		"forumType": "f",
+		"parent": 10,
+		"heritage": "0007-0010-0014",
+		"order": 1,
+		"threadCount": 2
+	},
+	{
+		"id": 15,
+		"title": "Introductions",
+		"description": "Introduce yourself to your fellow gamers!",
+		"forumType": "f",
+		"parent": 5,
+		"heritage": "0002-0005-0015",
+		"order": 1,
+		"threadCount": 669
+	}
+]

@@ -20,11 +20,16 @@ from faker import Faker
 
 faker = Faker()
 
+from datetime import datetime
+
+from django.db import connection
+
 from users.functions import register_user
 from permissions.models import Role, Permission
 from permissions.models.permission import ValidPermissions
 from permissions.functions import create_permission
 from systems.models import System, Genre, Publisher
+from forums.models import Forum
 
 print("\n\n")
 
@@ -40,7 +45,9 @@ guest_role = Role(name="Guest", owner=user)
 guest_role.save()
 member_role = Role(name="Member", owner=user)
 member_role.save()
-print("Add Guest and Member roles\n")
+member_role = Role(name="Moderator", owner=user)
+member_role.save()
+print("Add Guest, Member, and Moderator roles\n")
 
 user.roles.add(member_role)
 user.save()
@@ -90,3 +97,16 @@ for system_data in systems_data:
             system.genres.add(genre)
     print(f"Created system: {system.name}")
 print("\n")
+
+
+with open("data/forums.json") as f:
+    forums_data = json.load(f)
+
+forums = {}
+for forum_data in forums_data:
+    if forum_data["parent"] is not None:
+        forum_data["parent"] = forums[forum_data["parent"]]
+    forum = Forum(**forum_data, createdAt=datetime.now())
+    forum.save()
+    forums[forum.id] = forum
+print("Forums created\n")
