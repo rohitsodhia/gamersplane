@@ -16,6 +16,7 @@ from referral_links.routes import referral_links
 from systems.routes import systems
 from permissions.roles_routes import roles
 from permissions.permissions_routes import permissions
+from forums.forums_routes import forums
 
 seed()
 
@@ -33,5 +34,6 @@ def create_app():
     app.register_blueprint(systems)
     app.register_blueprint(roles)
     app.register_blueprint(permissions)
+    app.register_blueprint(forums)
 
     return app
