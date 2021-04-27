@@ -1,9 +1,10 @@
 from typing import Tuple
 
 
-class Response:
-    BuildReturnType = Tuple[object, int]
+BuildReturnType = Tuple[object, int]
 
+
+class Response:
     def __init__(self):
         self.reset()
 
