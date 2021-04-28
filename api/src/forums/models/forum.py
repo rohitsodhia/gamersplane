@@ -6,6 +6,7 @@ from helpers.base_models import SoftDeleteModel, TimestampedModel
 class Forum(SoftDeleteModel, TimestampedModel):
     class Meta:
         db_table = "forums"
+        indexes = [models.Index(fields=["parent"]), models.Index(fields=["heritage"])]
 
     class ForumTypes(models.TextChoices):
         FORUM = "f", "Forum"
