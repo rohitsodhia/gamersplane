@@ -31,3 +31,7 @@ class ForumSerializer(serializers.ModelSerializer):
 
     parent = ParentForumSerializer()
     children = serializers.ListField(child=ChildForumSerializer(), allow_empty=True)
+    heritage = serializers.SerializerMethodField()
+
+    def get_heritage(self, obj):
+        return [0] + [int(id) for id in obj.heritage.split("-")]
