@@ -26,3 +26,9 @@ class Forum(SoftDeleteModel, TimestampedModel):
         "games.Game", on_delete=models.PROTECT, db_column="gameId", null=True
     )
     threadCount = models.IntegerField(default=0)
+
+    @property
+    def children(self):
+        children_objs = Forum.objects.filter(parent=self.id).order_by("order")
+        children = [obj for obj in children_objs]
+        return children

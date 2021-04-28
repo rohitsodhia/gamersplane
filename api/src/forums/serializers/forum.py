@@ -12,9 +12,22 @@ class ParentForumSerializer(serializers.ModelSerializer):
         ]
 
 
+class ChildForumSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Forum
+        fields = [
+            "id",
+            "title",
+            "description",
+            "order",
+            "threadCount",
+        ]
+
+
 class ForumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Forum
         fields = "__all__"
 
     parent = ParentForumSerializer()
+    children = serializers.ListField(child=ChildForumSerializer(), allow_empty=True)
