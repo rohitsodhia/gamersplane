@@ -30,3 +30,4 @@ CACHES = {
     }
 }
 INSTALLED_APPS = apps
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
