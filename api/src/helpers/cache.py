@@ -21,7 +21,9 @@ def get_objects_by_id(ids, model, cache_key):
         obj = cache.get(CACHE_KEY_MAP[cache_key].format(id=id))
         if not obj:
             obj = model.objects.get(id=ids)
-        cache.set(CACHE_KEY_MAP[cache_key].format(id=id), obj)
+            cache.set(CACHE_KEY_MAP[cache_key].format(id=id), obj)
+        else:
+            cache.touch(CACHE_KEY_MAP[cache_key].format(id=id))
         return obj
 
     cache_keys = [CACHE_KEY_MAP[cache_key].format(id=id) for id in ids]
@@ -34,5 +36,7 @@ def get_objects_by_id(ids, model, cache_key):
         for obj in model_objs:
             objs[obj.id] = obj
             obj_caches[CACHE_KEY_MAP[cache_key].format(id=obj.id)] = obj
-    cache.set_many(obj_caches)
+        cache.set_many(obj_caches)
+    for key in retrieved_objs:
+        cache.touch(key)
     return objs
