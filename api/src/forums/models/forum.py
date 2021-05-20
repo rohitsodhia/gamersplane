@@ -2,6 +2,21 @@ from django.db import models
 from helpers.base_models import SoftDeleteModel, TimestampedModel
 
 
+class HeritageField(models.TextField):
+    def __init__(self, *args, **kwargs):
+        kwargs["max_length"] = 25
+        kwargs["null"] = True
+        super().__init__(*args, **kwargs)
+
+    def from_db_value(self, value, expression, connection):
+        if value == "":
+            return []
+        return [int(id) for id in value.split("-")]
+
+    def get_prep_value(self, value):
+        return "-".join([str(forum_id).rjust(4, "0") for forum_id in value])
+
+
 class Forum(SoftDeleteModel, TimestampedModel):
     class Meta:
         db_table = "forums"
@@ -19,7 +34,7 @@ class Forum(SoftDeleteModel, TimestampedModel):
     parent = models.ForeignKey(
         "forums.Forum", on_delete=models.PROTECT, db_column="parentId", null=True
     )
-    heritage = models.TextField(max_length=25, null=True)
+    heritage = HeritageField()
     order = models.IntegerField()
     game = models.ForeignKey(
         "games.Game", on_delete=models.PROTECT, db_column="gameId", null=True

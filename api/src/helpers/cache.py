@@ -5,9 +5,15 @@ from django.core.cache import cache
 
 class CacheKeys(Enum):
     FORUM_DETAILS = "forum_details"
+    FORUM_CHILDREN = "forum_children"
+    GAME_DETAILS = "game_details"
 
 
-CACHE_KEY_MAP = {"forum_details": "forum:{id}:details"}
+CACHE_KEY_MAP = {
+    "forum_details": "forum:{id}:details",
+    "forum_children": "forum:{id}:children",
+    "game_details": "game:{id}",
+}
 
 
 def get_objects_by_id(ids, model, cache_key):

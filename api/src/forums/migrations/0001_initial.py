@@ -40,7 +40,10 @@ class Migration(migrations.Migration):
                         null=True,
                     ),
                 ),
-                ("heritage", models.TextField(max_length=25, null=True)),
+                (
+                    "heritage",
+                    forums.models.forum.HeritageField(max_length=25, null=True),
+                ),
                 ("order", models.IntegerField()),
                 ("threadCount", models.IntegerField(default=0)),
             ],
@@ -161,5 +164,13 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to="forums.thread",
             ),
+        ),
+        migrations.AddIndex(
+            model_name="forum",
+            index=models.Index(fields=["parent"], name="forums_parentI_9c0c75_idx"),
+        ),
+        migrations.AddIndex(
+            model_name="forum",
+            index=models.Index(fields=["heritage"], name="forums_heritag_63a2ec_idx"),
         ),
     ]
