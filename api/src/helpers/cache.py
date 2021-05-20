@@ -19,12 +19,12 @@ CACHE_KEY_MAP = {
 
 def get_objects_by_id(ids, model: models.Model, cache_key: str) -> models.Model:
     if type(ids) in [int, str]:
-        obj = cache.get(CACHE_KEY_MAP[cache_key].format(id=id))
+        obj = cache.get(CACHE_KEY_MAP[cache_key].format(id=ids))
         if not obj:
             obj = model.objects.get(id=ids)
-            cache.set(CACHE_KEY_MAP[cache_key].format(id=id), obj)
+            cache.set(CACHE_KEY_MAP[cache_key].format(id=ids), obj)
         else:
-            cache.touch(CACHE_KEY_MAP[cache_key].format(id=id))
+            cache.touch(CACHE_KEY_MAP[cache_key].format(id=ids))
         return obj
 
     cache_keys = [CACHE_KEY_MAP[cache_key].format(id=id) for id in ids]
