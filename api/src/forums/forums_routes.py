@@ -47,6 +47,8 @@ def create_forum():
             invalid_values[
                 "game_id"
             ] = f"game_id \"{request_data['game_id']}\" does not exist"
+    if invalid_values:
+        return response.errors({"invalid_values": invalid_values})
 
     forum_values = {
         "title": request_data["title"],
