@@ -51,7 +51,7 @@ class Forum(SoftDeleteModel, TimestampedModel):
         )
         if children_ids:
             cache.touch(CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id))
-            children_objs = get_objects_by_id(
+            children_objs: list[Forum] = get_objects_by_id(
                 children_ids, Forum, CacheKeys.FORUM_DETAILS.value
             )
         else:

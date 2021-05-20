@@ -1,6 +1,7 @@
 from enum import Enum
 
 from django.core.cache import cache
+from django.db import models
 
 
 class CacheKeys(Enum):
@@ -16,7 +17,7 @@ CACHE_KEY_MAP = {
 }
 
 
-def get_objects_by_id(ids, model, cache_key):
+def get_objects_by_id(ids, model: models.Model, cache_key: str) -> models.Model:
     if type(ids) in [int, str]:
         obj = cache.get(CACHE_KEY_MAP[cache_key].format(id=id))
         if not obj:
