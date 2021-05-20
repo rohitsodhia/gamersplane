@@ -2,10 +2,10 @@ from flask import Blueprint, request
 
 from helpers.response import response
 from helpers.endpoint import require_values
+from helpers.cache import CacheKeys, get_objects_by_id
 
 from forums.models import Forum
 from forums.serializers import ForumSerializer
-from helpers.cache import CacheKeys, get_objects_by_id
 from games.models import Game
 
 forums = Blueprint("forums", __name__, url_prefix="/forums")
