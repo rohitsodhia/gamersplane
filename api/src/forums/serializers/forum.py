@@ -1,3 +1,5 @@
+from typing import List
+
 from rest_framework import serializers
 
 from forums.models import Forum
@@ -36,7 +38,7 @@ class ForumSerializer(serializers.ModelSerializer):
 
     def get_heritage(self, obj):
         forum_ids = [1] + obj.heritage
-        forums: list[Forum] = get_objects_by_id(
+        forums: List[Forum] = get_objects_by_id(
             forum_ids, Forum, CacheKeys.FORUM_DETAILS.value
         )
         serialized_forums = [ParentForumSerializer(forums[id]).data for id in forum_ids]

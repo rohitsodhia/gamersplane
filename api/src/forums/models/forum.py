@@ -1,3 +1,5 @@
+from typing import List
+
 from django.db import models
 from django.core.cache import cache
 
@@ -53,7 +55,7 @@ class Forum(SoftDeleteModel, TimestampedModel):
         )
         if children_ids:
             cache.touch(CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id))
-            children_objs: list[Forum] = get_objects_by_id(
+            children_objs: List[Forum] = get_objects_by_id(
                 children_ids, Forum, CacheKeys.FORUM_DETAILS.value
             )
         else:
