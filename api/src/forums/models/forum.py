@@ -85,3 +85,7 @@ class Forum(SoftDeleteModel, TimestampedModel):
                 num_children = len(children_ids)
             self.order = num_children + 1
         super().save(*args, **kwargs)
+
+    def generate_heritage(self) -> None:
+        if self.id:
+            self.heritage = self.parent.heritage + [self.id]

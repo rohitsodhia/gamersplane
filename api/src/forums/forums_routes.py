@@ -62,6 +62,6 @@ def create_forum():
 
     forum = Forum(**forum_values)
     forum.save()
-    forum.heritage = parent.heritage + [forum.id]
+    forum.generate_heritage()
     forum.save()
     return response.success({"forum": {"id": forum.id, "title": forum.title}})
