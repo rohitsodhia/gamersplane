@@ -36,7 +36,9 @@ class Response:
         if kwargs.get("response_code"):
             self.set_response_code(kwargs["response_code"])
 
-        response = {"success": self._success}
+        response = {}
+        if self._response_code == 200:
+            response["success"] = self._success
         if self._data:
             response["data"] = self._data
         if self._errors:
@@ -61,6 +63,11 @@ class Response:
         if not errors:
             errors = {"forbidden": True}
         return self.errors(errors=errors, response_code=403)
+
+    def not_found(self, errors: object = None) -> BuildReturnType:
+        if not errors:
+            errors = {"not_found": True}
+        return self.build(errors=errors, response_code=404)
 
 
 response = Response()
