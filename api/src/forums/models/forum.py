@@ -1,5 +1,8 @@
 from django.db import models
+from django.core.cache import cache
+
 from helpers.base_models import SoftDeleteModel, TimestampedModel
+from helpers.cache import CacheKeys, CACHE_KEY_MAP, get_objects_by_id
 
 
 class HeritageField(models.TextField):
@@ -43,6 +46,15 @@ class Forum(SoftDeleteModel, TimestampedModel):
 
     @property
     def children(self):
-        children_objs = Forum.objects.filter(parent=self.id).order_by("order")
+        children_ids = cache.get(
+            CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id), []
+        )
+        if children_ids:
+            cache.touch(CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id))
+            children_objs = get_objects_by_id(
+                children_ids, Forum, CacheKeys.FORUM_DETAILS.value
+            )
+        else:
+            children_objs = Forum.objects.filter(parent=self.id).order_by("order")
         children = [obj for obj in children_objs]
         return children
