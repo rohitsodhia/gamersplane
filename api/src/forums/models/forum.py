@@ -17,6 +17,8 @@ class HeritageField(models.TextField):
         return [int(id) for id in value.split("-")]
 
     def get_prep_value(self, value):
+        if not value:
+            return None
         return "-".join([str(forum_id).rjust(4, "0") for forum_id in value])
 
 
