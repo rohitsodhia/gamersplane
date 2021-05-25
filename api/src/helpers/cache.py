@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Dict
 
 from django.core.cache import cache
 from django.db import models
@@ -22,7 +23,7 @@ def get_objects_by_id(ids, model: models.Model, cache_key: str) -> models.Model:
         obj = cache.get(CACHE_KEY_MAP[cache_key].format(id=ids))
         if not obj:
             obj = model.objects.get(id=ids)
-            cache.set(CACHE_KEY_MAP[cache_key].format(id=ids), obj)
+            set_cache(cache_key, {"id": ids}, obj)
         else:
             cache.touch(CACHE_KEY_MAP[cache_key].format(id=ids))
         return obj
@@ -41,3 +42,7 @@ def get_objects_by_id(ids, model: models.Model, cache_key: str) -> models.Model:
     for key in retrieved_objs:
         cache.touch(key)
     return objs
+
+
+def set_cache(key: str, format_vals: Dict, value) -> None:
+    cache.set(CACHE_KEY_MAP[key].format(**format_vals), value)
