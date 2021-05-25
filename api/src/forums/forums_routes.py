@@ -11,7 +11,7 @@ from games.models import Game
 forums = Blueprint("forums", __name__, url_prefix="/forums")
 
 
-@forums.route("/<forum_id>", methods=["GET"])
+@forums.route("/<int:forum_id>", methods=["GET"])
 def get_forums(forum_id: int = 0):
     forum = get_objects_by_id(forum_id, Forum, CacheKeys.FORUM_DETAILS.value)
     serialized_forum = ForumSerializer(forum)
