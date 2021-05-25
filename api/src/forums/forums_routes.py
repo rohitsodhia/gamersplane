@@ -32,10 +32,11 @@ def create_forum():
         ] = f"forumTypes must be in [{Forum.ForumTypes.values}])"
     if not int(request_data["parent"]):
         invalid_values["parent"] = f"parent must be an integer"
-    parent: Forum = get_objects_by_id(
-        request_data["parent"], Forum, CacheKeys.FORUM_DETAILS.value
-    )
-    if not parent:
+    try:
+        parent: Forum = get_objects_by_id(
+            request_data["parent"], Forum, CacheKeys.FORUM_DETAILS.value
+        )
+    except Forum.DoesNotExist:
         invalid_values["parent"] = f"parent \"{request_data['parent']}\" does not exist"
 
     game = None
