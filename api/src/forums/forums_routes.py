@@ -2,7 +2,7 @@ from flask import Blueprint, request
 
 from helpers.response import response
 from helpers.endpoint import require_values
-from helpers.cache import CacheKeys, get_objects_by_id
+from helpers.cache import CacheKeys, get_objects_by_id, set_cache
 
 from forums.models import Forum
 from forums.serializers import ForumSerializer
@@ -66,3 +66,43 @@ def create_forum():
     forum.generate_heritage()
     forum.save()
     return response.success({"forum": {"id": forum.id, "title": forum.title}})
+
+
+@forums.route("/<int:forum_id>", methods=["PATCH"])
+def update_forum(forum_id: int):
+    try:
+        forum: Forum = get_objects_by_id(forum_id, Forum, CacheKeys.FORUM_DETAILS.value)
+    except Forum.DoesNotExist:
+        return response.not_found()
+
+    request_data = request.json
+    invalid_values = {}
+    if (
+        "forumType" in request_data
+        and request_data["forumType"] not in Forum.ForumTypes.values
+    ):
+        invalid_values[
+            "forum_type"
+        ] = f"forumTypes must be in [{Forum.ForumTypes.values}])"
+    if "parent" in request_data:
+        if not int(request_data["parent"]):
+            invalid_values["parent"] = f"parent must be an integer"
+        else:
+            try:
+                parent: Forum = get_objects_by_id(
+                    request_data["parent"], Forum, CacheKeys.FORUM_DETAILS.value
+                )
+            except Forum.DoesNotExist:
+                invalid_values[
+                    "parent"
+                ] = f"parent \"{request_data['parent']}\" does not exist"
+        request_data["parent"] = parent
+    for key, value in request_data.items():
+        if key in ["title", "description", "forumType", "parent", "order"]:
+            setattr(forum, key, value)
+    forum.generate_heritage()
+    forum.save()
+    set_cache(CacheKeys.FORUM_DETAILS.value, {"id": forum.id}, forum)
+    serialized_forum = ForumSerializer(forum)
+
+    return response.success({"updated": True, "forum": serialized_forum.data})
