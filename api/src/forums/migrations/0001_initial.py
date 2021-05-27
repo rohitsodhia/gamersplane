@@ -3,6 +3,8 @@
 from django.db import migrations, models
 import django.db.models.deletion
 
+import forums
+
 
 class Migration(migrations.Migration):
 
@@ -164,10 +166,6 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to="forums.thread",
             ),
-        ),
-        migrations.AddIndex(
-            model_name="forum",
-            index=models.Index(fields=["parent"], name="forums_parentI_9c0c75_idx"),
         ),
         migrations.AddIndex(
             model_name="forum",

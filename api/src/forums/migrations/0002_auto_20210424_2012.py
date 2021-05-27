@@ -34,4 +34,8 @@ class Migration(migrations.Migration):
                 to="forums.forum",
             ),
         ),
+        migrations.AddIndex(
+            model_name="forum",
+            index=models.Index(fields=["parent"], name="forums_parentI_9c0c75_idx"),
+        ),
     ]
