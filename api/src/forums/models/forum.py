@@ -7,7 +7,7 @@ from helpers.base_models import SoftDeleteModel, TimestampedModel
 from helpers.cache import CacheKeys, CACHE_KEY_MAP, get_objects_by_id
 
 
-class HeritageField(models.TextField):
+class HeritageField(models.CharField):
     def __init__(self, *args, **kwargs):
         kwargs["max_length"] = 25
         kwargs["null"] = True

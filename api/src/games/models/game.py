@@ -10,7 +10,7 @@ class Game(SoftDeleteModel, TimestampedModel):
         OPEN = True, "Open"
         CLOSED = False, "Closed"
 
-    title = models.TextField(max_length=50)
+    title = models.CharField(max_length=50)
     system = models.ForeignKey(
         "systems.System", on_delete=models.PROTECT, db_column="systemId"
     )
@@ -21,7 +21,7 @@ class Game(SoftDeleteModel, TimestampedModel):
     created = models.DateTimeField(auto_now=True)
     start = models.DateTimeField(auto_now=True)
     end = (models.DateTimeField(null=True),)
-    postFrequency = models.TextField(max_length=4)
+    postFrequency = models.CharField(max_length=4)
     numPlayers = models.SmallIntegerField()
     charsPerPlayer = models.SmallIntegerField(default=1)
     description = models.TextField(null=True)
