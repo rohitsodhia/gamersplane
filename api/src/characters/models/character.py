@@ -1,13 +1,20 @@
 from django.db import models
-from helpers.base_models import SoftDeleteModel
+from django.db.models.deletion import PROTECT
+from helpers.base_models import TimestampedModel, SoftDeleteModel
 
 
-class Character(SoftDeleteModel):
+class Character(TimestampedModel, SoftDeleteModel):
     class Meta:
         db_table = "characters"
 
-    class Statuses(models.Choices):
-        OPEN = True, "Open"
-        CLOSED = False, "Closed"
+    class Type(models.TextChoices):
+        PC = "pc", "PC"
+        NPC = "npc", "NPC"
 
-    name = models.TextField(max_length=100)
+    label = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    system = models.ForeignKey(
+        "systems.System", on_delete=models.PROTECT, related_name="system"
+    )
+    type = models.CharField(max_length=5, choices=Type.choices)
+    data = models.JSONField(null=True)

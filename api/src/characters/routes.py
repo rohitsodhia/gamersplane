@@ -5,5 +5,6 @@ from helpers.response import response
 characters = Blueprint("characters", __name__)
 
 
-# @tools.route("/dice", methods=["GET"])
-# def roll_dice():
+@characters.route("/", methods=["POST"])
+def create_character():
+    pass
