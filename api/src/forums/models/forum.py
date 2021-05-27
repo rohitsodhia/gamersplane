@@ -76,12 +76,14 @@ class Forum(SoftDeleteModel, TimestampedModel):
                 num_children = len(children_ids)
                 cache.touch(CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id))
             else:
-                children = Forum.objects.filter(parent=self.parent.id).values("id")
-                children_ids = [child["id"] for child in children]
-                cache.set(
-                    CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id),
-                    children_ids,
-                )
+                children = Forum.objects.filter(parent=self.parent.id)
+                children_ids = []
+                if children.count():
+                    children_ids = [child["id"] for child in children.values("id")]
+                    cache.set(
+                        CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id),
+                        children_ids,
+                    )
                 num_children = len(children_ids)
             self.order = num_children + 1
         super().save(*args, **kwargs)
