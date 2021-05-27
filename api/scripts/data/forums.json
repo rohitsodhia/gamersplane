@@ -5,8 +5,8 @@
 		"description": null,
 		"forumType": null,
 		"parent": null,
-		"heritage": "",
-		"order": 0,
+		"heritage": [],
+		"order": 1,
 		"threadCount": 0
 	},
 	{
@@ -15,7 +15,7 @@
 		"description": null,
 		"forumType": "c",
 		"parent": 1,
-		"heritage": "0002",
+		"heritage": [ 2 ],
 		"order": 1,
 		"threadCount": 0
 	},
@@ -25,7 +25,7 @@
 		"description": null,
 		"forumType": "c",
 		"parent": 1,
-		"heritage": "0003",
+		"heritage": [ 3 ],
 		"order": 5,
 		"threadCount": 0
 	},
@@ -35,7 +35,7 @@
 		"description": "Read and discuss all site announcements.",
 		"forumType": "f",
 		"parent": 2,
-		"heritage": "0002-0004",
+		"heritage": [ 2, 4 ],
 		"order": 1,
 		"threadCount": 93
 	},
@@ -45,7 +45,7 @@
 		"description": "Anything not fitting into another forum goes here.",
 		"forumType": "f",
 		"parent": 2,
-		"heritage": "0002-0005",
+		"heritage": [ 2, 5 ],
 		"order": 2,
 		"threadCount": 235
 	},
@@ -55,7 +55,7 @@
 		"description": null,
 		"forumType": "f",
 		"parent": 2,
-		"heritage": "0002-0006",
+		"heritage": [ 2, 6 ],
 		"order": 3,
 		"threadCount": 426
 	},
@@ -65,7 +65,7 @@
 		"description": null,
 		"forumType": "c",
 		"parent": 1,
-		"heritage": "0007",
+		"heritage": [ 7 ],
 		"order": 2,
 		"threadCount": 0
 	},
@@ -75,7 +75,7 @@
 		"description": null,
 		"forumType": "f",
 		"parent": 7,
-		"heritage": "0007-0008",
+		"heritage": [ 7, 8 ],
 		"order": 1,
 		"threadCount": 324
 	},
@@ -85,7 +85,7 @@
 		"description": null,
 		"forumType": "f",
 		"parent": 7,
-		"heritage": "0007-0009",
+		"heritage": [ 7, 9 ],
 		"order": 2,
 		"threadCount": 72
 	},
@@ -95,7 +95,7 @@
 		"description": null,
 		"forumType": "f",
 		"parent": 7,
-		"heritage": "0007-0010",
+		"heritage": [ 7, 10 ],
 		"order": 3,
 		"threadCount": 23
 	},
@@ -105,7 +105,7 @@
 		"description": "Discuss games you're interested in running, post about a game you'd like to see, or recruit people for your game here.",
 		"forumType": "f",
 		"parent": 3,
-		"heritage": "0003-0011",
+		"heritage": [ 3, 11 ],
 		"order": 1,
 		"threadCount": 1581
 	},
@@ -115,7 +115,7 @@
 		"description": null,
 		"forumType": "f",
 		"parent": 6,
-		"heritage": "0002-0006-0012",
+		"heritage": [ 2, 6, 12 ],
 		"order": 1,
 		"threadCount": 363
 	},
@@ -125,7 +125,7 @@
 		"description": "Got thoughts on books, movies, comics, etc? Share it!",
 		"forumType": "f",
 		"parent": 5,
-		"heritage": "0002-0005-0013",
+		"heritage": [ 2, 5, 13 ],
 		"order": 2,
 		"threadCount": 3
 	},
@@ -135,7 +135,7 @@
 		"description": null,
 		"forumType": "f",
 		"parent": 10,
-		"heritage": "0007-0010-0014",
+		"heritage": [ 7, 10, 14 ],
 		"order": 1,
 		"threadCount": 2
 	},
@@ -145,7 +145,7 @@
 		"description": "Introduce yourself to your fellow gamers!",
 		"forumType": "f",
 		"parent": 5,
-		"heritage": "0002-0005-0015",
+		"heritage": [ 2, 5, 15 ],
 		"order": 1,
 		"threadCount": 669
 	}
