@@ -12,12 +12,11 @@ class TestResponse:
         success = True
         data = {faker.random_letter(): faker.random_digit()}
         errors = {faker.random_letter(): faker.random_digit()}
-        response_code = 400
 
         response_body, returned_response_code = response.build(
-            success=success, data=data, errors=errors, response_code=response_code
+            success=success, data=data, errors=errors
         )
-        assert returned_response_code == response_code
+        assert returned_response_code == 200
         assert response_body["success"] == success
         assert response_body["data"] == data
         assert response_body["errors"] == errors
