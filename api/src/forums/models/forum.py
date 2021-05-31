@@ -4,7 +4,7 @@ from django.db import models
 from django.core.cache import cache
 
 from helpers.base_models import SoftDeleteModel, TimestampedModel
-from helpers.cache import CacheKeys, CACHE_KEY_MAP, get_objects_by_id
+from helpers.cache import CacheKeys, generate_cache_id, get_objects_by_id
 
 
 class HeritageField(models.CharField):
@@ -51,17 +51,17 @@ class Forum(SoftDeleteModel, TimestampedModel):
     @property
     def children(self):
         children_ids = cache.get(
-            CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id), []
+            generate_cache_id(CacheKeys.FORUM_CHILDREN.value, {"id": id}), []
         )
         if children_ids:
-            cache.touch(CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id))
+            cache.touch(generate_cache_id(CacheKeys.FORUM_CHILDREN.value, {"id": id}))
             children_objs: List[Forum] = get_objects_by_id(
                 children_ids, Forum, CacheKeys.FORUM_DETAILS.value
             )
         else:
             children_objs = Forum.objects.filter(parent=self.id).order_by("order")
             cache.set(
-                CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id),
+                generate_cache_id(CacheKeys.FORUM_CHILDREN.value, {"id": id}),
                 [obj.id for obj in children_objs],
             )
         children = [obj for obj in children_objs]
@@ -70,18 +70,20 @@ class Forum(SoftDeleteModel, TimestampedModel):
     def save(self, *args, **kwargs):
         if not self.order:
             children_ids = cache.get(
-                CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id), []
+                generate_cache_id(CacheKeys.FORUM_CHILDREN.value, {"id": id}), []
             )
             if children_ids:
                 num_children = len(children_ids)
-                cache.touch(CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id))
+                cache.touch(
+                    generate_cache_id(CacheKeys.FORUM_CHILDREN.value, {"id": id})
+                )
             else:
                 children = Forum.objects.filter(parent=self.parent.id)
                 children_ids = []
                 if children.count():
                     children_ids = [child["id"] for child in children.values("id")]
                     cache.set(
-                        CACHE_KEY_MAP[CacheKeys.FORUM_CHILDREN.value].format(id=id),
+                        generate_cache_id(CacheKeys.FORUM_CHILDREN.value, {"id": id}),
                         children_ids,
                     )
                 num_children = len(children_ids)

@@ -18,9 +18,14 @@ CACHE_KEY_MAP = {
 }
 
 
+def generate_cache_id(cache_key: str, format_vars: Dict) -> str:
+    key = CACHE_KEY_MAP[cache_key].format(**format_vars)
+    return key
+
+
 def get_objects_by_id(ids, model: models.Model, cache_key: str) -> models.Model:
     if type(ids) in [int, str]:
-        obj = cache.get(CACHE_KEY_MAP[cache_key].format(id=ids))
+        obj = cache.get(generate_cache_id(cache_key, {"id": ids}))
         if not obj:
             obj = model.objects.get(id=ids)
             set_cache(cache_key, {"id": ids}, obj)
@@ -28,7 +33,7 @@ def get_objects_by_id(ids, model: models.Model, cache_key: str) -> models.Model:
             cache.touch(CACHE_KEY_MAP[cache_key].format(id=ids))
         return obj
 
-    cache_keys = [CACHE_KEY_MAP[cache_key].format(id=id) for id in ids]
+    cache_keys = [generate_cache_id(cache_key, {"id": id}) for id in ids]
     obj_caches = cache.get_many(cache_keys)
     objs = {val.id: val for _, val in obj_caches.items()}
     retrieved_objs = objs.keys()
@@ -37,7 +42,7 @@ def get_objects_by_id(ids, model: models.Model, cache_key: str) -> models.Model:
         model_objs = model.objects.filter(id__in=objs_to_get)
         for obj in model_objs:
             objs[obj.id] = obj
-            obj_caches[CACHE_KEY_MAP[cache_key].format(id=obj.id)] = obj
+            obj_caches[generate_cache_id(cache_key, {"id": obj.id})] = obj
         cache.set_many(obj_caches)
     for key in retrieved_objs:
         cache.touch(key)
@@ -45,4 +50,4 @@ def get_objects_by_id(ids, model: models.Model, cache_key: str) -> models.Model:
 
 
 def set_cache(key: str, format_vals: Dict, value) -> None:
-    cache.set(CACHE_KEY_MAP[key].format(**format_vals), value)
+    cache.set(generate_cache_id(key, format_vals), value)
