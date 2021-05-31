@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from fixtures import app, faker
+from fixtures import faker
 
 from users.models import User
 
