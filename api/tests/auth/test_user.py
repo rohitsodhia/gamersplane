@@ -1,7 +1,3 @@
-from datetime import datetime
-
-from fixtures import faker
-
 from users.models import User
 
 

@@ -1,8 +1,6 @@
-from faker import Faker
+from generators import faker
 
 from helpers.response import Response
-
-faker = Faker()
 
 
 class TestResponse:
